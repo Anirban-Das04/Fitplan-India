@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Language — FitPlan India</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=Hind:wght@400;500;600&family=Hind+Siliguri:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+:root{
+  --green:#6EE7B7;--blue:#3B82F6;--purple:#A78BFA;
+  --orange:#FB923C;--red:#F87171;--yellow:#FCD34D;
+  --grad:linear-gradient(135deg,#6EE7B7,#3B82F6);
+  --grad-warm:linear-gradient(135deg,#FB923C,#F87171);
+  --grad-purple:linear-gradient(135deg,#A78BFA,#6EE7B7);
+  --font-d:'Syne',sans-serif;--font-b:'DM Sans',sans-serif;
+  --font-hi:'Hind',sans-serif;--font-bn:'Hind Siliguri',sans-serif;
+  --ease:cubic-bezier(0.4,0,0.2,1);--bounce:cubic-bezier(0.34,1.56,0.64,1);
+}
+[data-theme="dark"]{--bg:#070b12;--surface:rgba(255,255,255,0.04);--surface2:rgba(255,255,255,0.07);--border:rgba(255,255,255,0.08);--border2:rgba(110,231,183,0.28);--text:#F0F6FF;--text2:#7A8FA8;--text3:#3A4A60;--shadow:0 8px 40px rgba(0,0,0,0.6);--nav:rgba(7,11,18,0.55);}
+[data-theme="light"]{--bg:#EEF2FF;--surface:rgba(255,255,255,0.6);--surface2:rgba(255,255,255,0.85);--border:rgba(0,0,0,0.07);--border2:rgba(59,130,246,0.3);--text:#111827;--text2:#4B5563;--text3:#9CA3AF;--shadow:0 8px 32px rgba(0,40,120,0.1);--nav:rgba(238,242,255,0.55);}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-b);background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;transition:background .4s,color .4s;padding-top:88px;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 60% at 20% 15%,rgba(110,231,183,0.07) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 80% 80%,rgba(59,130,246,0.07) 0%,transparent 60%),radial-gradient(ellipse 40% 40% at 50% 50%,rgba(251,146,60,0.03) 0%,transparent 60%);pointer-events:none;z-index:0;}
+body>*{position:relative;z-index:1;}
+body.lang-hi{font-family:var(--font-hi);}
+body.lang-bn{font-family:var(--font-bn);}
+
+/* NAVBAR */
+.nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);width:calc(100% - 48px);max-width:1100px;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.5rem;background:var(--nav);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);border:1px solid rgba(255,255,255,0.1);border-radius:100px;box-shadow:0 8px 40px rgba(0,0,0,0.4),inset 0 1px 0 rgba(255,255,255,0.07);transition:background .4s,border-color .4s;}
+[data-theme="light"] .nav{border-color:rgba(59,130,246,0.15);box-shadow:0 8px 40px rgba(0,40,100,0.12),inset 0 1px 0 rgba(255,255,255,0.6);}
+.nav-left{display:flex;align-items:center;gap:.75rem;}
+.nav-logo{width:34px;height:34px;background:var(--grad);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;box-shadow:0 4px 16px rgba(110,231,183,.3);}
+.nav-brand{font-family:var(--font-d)!important;font-weight:800;font-size:1.1rem;letter-spacing:-.02em;color:var(--text);}
+.nav-brand em{font-style:normal;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.nav-links{display:flex;align-items:center;gap:.25rem;}
+.nav-link{display:flex;align-items:center;gap:.4rem;padding:.45rem 1rem;border-radius:100px;font-size:.82rem;font-weight:500;color:var(--text2);text-decoration:none;background:none;border:1px solid transparent;cursor:pointer;transition:all .25s;font-family:var(--font-d)!important;white-space:nowrap;}
+.nav-link:hover,.nav-link.active{color:var(--text);background:rgba(255,255,255,0.07);border-color:rgba(255,255,255,0.1);}
+[data-theme="light"] .nav-link:hover,[data-theme="light"] .nav-link.active{background:rgba(59,130,246,0.08);border-color:rgba(59,130,246,0.18);color:#111827;}
+.nav-link.active-lang{background:linear-gradient(135deg,rgba(110,231,183,.12),rgba(59,130,246,.08));border-color:rgba(110,231,183,.3);color:var(--green);}
+.nav-link.exercise-lnk{background:linear-gradient(135deg,rgba(110,231,183,.1),rgba(59,130,246,.07));border-color:rgba(110,231,183,.2);color:var(--green);}
+.nav-link.smart-lnk{background:linear-gradient(135deg,rgba(167,139,250,.1),rgba(59,130,246,.07));border-color:rgba(167,139,250,.2);color:var(--purple);}
+.nav-link.progress-lnk{background:linear-gradient(135deg,rgba(251,146,60,.1),rgba(248,113,113,.07));border-color:rgba(251,146,60,.2);color:var(--orange);}
+.theme-btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);cursor:pointer;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:all .2s;color:var(--text2);}
+.theme-btn:hover{border-color:var(--border2);color:var(--text);}
+.nav-right{display:flex;align-items:center;gap:.5rem;}
+@media(max-width:700px){.nav{border-radius:20px;width:calc(100% - 24px);top:10px;padding:.65rem 1rem;}.nav-link .nl{display:none;}.nav-link{padding:.45rem .65rem;}}
+
+/* HERO */
+.hero{padding:3rem 1.5rem 2.5rem;text-align:center;}
+.hero-badge{display:inline-block;padding:.35rem 1rem;border:1px solid rgba(110,231,183,.35);border-radius:100px;font-size:.78rem;color:var(--green);letter-spacing:.08em;background:rgba(110,231,183,.07);margin-bottom:1.25rem;animation:fadeUp .7s both .1s;}
+.hero-title{font-family:var(--font-d)!important;font-size:clamp(2rem,5vw,3.2rem);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin-bottom:.75rem;animation:fadeUp .7s both .2s;}
+.grad-text{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-desc{color:var(--text2);font-size:.95rem;max-width:480px;margin:0 auto;animation:fadeUp .7s both .3s;}
+
+/* LANG SELECTOR */
+.lang-selector-wrap{max-width:700px;margin:2rem auto;padding:0 1.5rem;animation:fadeUp .6s both .3s;}
+.lang-selector{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+.lang-btn{background:var(--surface);border:2px solid var(--border);border-radius:20px;padding:1.5rem 1rem;text-align:center;cursor:pointer;transition:all .3s var(--bounce);backdrop-filter:blur(16px);}
+.lang-btn:hover{transform:translateY(-4px);}
+.lang-btn.active{border-color:var(--border2);}
+.lang-btn.active.en{background:rgba(110,231,183,.08);border-color:rgba(110,231,183,.4);}
+.lang-btn.active.hi{background:rgba(251,146,60,.08);border-color:rgba(251,146,60,.4);}
+.lang-btn.active.bn{background:rgba(167,139,250,.08);border-color:rgba(167,139,250,.4);}
+.lang-flag{font-size:2.5rem;margin-bottom:.5rem;}
+.lang-name{font-family:var(--font-d)!important;font-size:1rem;font-weight:800;margin-bottom:.2rem;}
+.lang-native{font-size:.85rem;color:var(--text2);}
+.lang-btn.active .lang-name{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+/* MAIN */
+.main{max-width:1100px;margin:0 auto;padding:0 1.5rem 4rem;}
+.section-label{font-family:var(--font-d)!important;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text2);margin-bottom:1rem;display:flex;align-items:center;gap:.6rem;}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border);}
+
+/* CONTENT CARDS */
+.content-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:2rem;}
+.content-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:1.5rem;backdrop-filter:blur(16px);transition:all .25s var(--bounce);animation:cardUp .5s both;}
+.content-card:hover{transform:translateY(-4px);border-color:var(--border2);}
+.cc-icon{font-size:1.8rem;margin-bottom:.75rem;}
+.cc-title{font-family:var(--font-d)!important;font-size:1.05rem;font-weight:800;margin-bottom:.4rem;}
+.cc-sub{font-size:.82rem;color:var(--text2);line-height:1.6;}
+
+/* TIPS TABLE */
+.tips-table{background:var(--surface);border:1px solid var(--border);border-radius:20px;overflow:hidden;backdrop-filter:blur(16px);margin-bottom:2rem;}
+.tips-table-row{display:grid;grid-template-columns:2fr 2fr 2fr;border-bottom:1px solid var(--border);}
+.tips-table-row:last-child{border-bottom:none;}
+.tips-table-row.header{background:var(--surface2);}
+.tips-table-cell{padding:1rem 1.25rem;font-size:.85rem;}
+.tips-table-row.header .tips-table-cell{font-family:var(--font-d)!important;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);}
+.lang-flag-sm{margin-right:.4rem;}
+
+/* PHRASE CARDS */
+.phrase-grid{display:grid;grid-template-columns:1fr;gap:.75rem;margin-bottom:2rem;}
+.phrase-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.1rem 1.25rem;backdrop-filter:blur(12px);transition:all .25s;}
+.phrase-row:hover{border-color:var(--border2);}
+.phrase-cell{font-size:.88rem;}
+.phrase-cell.en{color:var(--green);font-weight:500;}
+.phrase-cell.hi{color:var(--orange);font-weight:500;}
+.phrase-cell.bn{color:var(--purple);font-weight:500;}
+
+/* FOOTER */
+.footer{text-align:center;padding:2rem;border-top:1px solid var(--border);font-size:.8rem;color:var(--text3);}
+.footer em{font-style:normal;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes cardUp{from{opacity:0;transform:translateY(25px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(max-width:768px){.content-grid{grid-template-columns:1fr;}.tips-table-row{grid-template-columns:1fr;}.phrase-row{grid-template-columns:1fr;}.lang-selector{grid-template-columns:1fr 1fr 1fr;}}
+@media(max-width:480px){.lang-selector{grid-template-columns:1fr;}}
+::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-thumb{background:var(--border);border-radius:100px;}
+::selection{background:rgba(110,231,183,.25);}
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="nav">
+  <div class="nav-left">
+    <div class="nav-logo">💪</div>
+    <span class="nav-brand">FitPlan<em>India</em></span>
+  </div>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">🏠 <span class="nl">Planner</span></a>
+    <a href="exercise.html" class="nav-link exercise-lnk">🏋️ <span class="nl">Exercise</span></a>
+    <a href="progress.html" class="nav-link progress-lnk">📊 <span class="nl">Progress</span></a>
+    <a href="smart.html" class="nav-link smart-lnk">🧠 <span class="nl">Smart</span></a>
+    <a href="language.html" class="nav-link active-lang">🌍 <span class="nl">Language</span></a>
+  </div>
+  <div class="nav-right">
+    <button class="theme-btn" id="themeBtn">☀</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">🌍 3 Languages Supported</div>
+  <h1 class="hero-title">Your Language.<br/><span class="grad-text">Your Fitness.</span></h1>
+  <p class="hero-desc" id="heroDesc">Switch between English, Hindi, and Bengali. FitPlan India speaks your language!</p>
+</section>
+
+<!-- LANGUAGE SELECTOR -->
+<div class="lang-selector-wrap">
+  <div class="lang-selector">
+    <div class="lang-btn en active" onclick="setLang('en')">
+      <div class="lang-flag">🇬🇧</div>
+      <div class="lang-name">English</div>
+      <div class="lang-native">English</div>
+    </div>
+    <div class="lang-btn hi" onclick="setLang('hi')">
+      <div class="lang-flag">🇮🇳</div>
+      <div class="lang-name">Hindi</div>
+      <div class="lang-native">हिन्दी</div>
+    </div>
+    <div class="lang-btn bn" onclick="setLang('bn')">
+      <div class="lang-flag">🇮🇳</div>
+      <div class="lang-name">Bengali</div>
+      <div class="lang-native">বাংলা</div>
+    </div>
+  </div>
+</div>
+
+<main class="main">
+
+  <!-- CONTENT CARDS -->
+  <div class="section-label" id="secFeatures">✦ App Features in Your Language</div>
+  <div class="content-grid">
+    <div class="content-card">
+      <div class="cc-icon">📊</div>
+      <div class="cc-title" data-key="bmi_title">BMI Analysis</div>
+      <div class="cc-sub" data-key="bmi_desc">Calculate your Body Mass Index and understand your current health status.</div>
+    </div>
+    <div class="content-card">
+      <div class="cc-icon">🔥</div>
+      <div class="cc-title" data-key="cal_title">Daily Calories</div>
+      <div class="cc-sub" data-key="cal_desc">Find out exactly how many calories you need to eat every day to reach your goal.</div>
+    </div>
+    <div class="content-card">
+      <div class="cc-icon">🥗</div>
+      <div class="cc-title" data-key="diet_title">7-Day Diet Plan</div>
+      <div class="cc-sub" data-key="diet_desc">Get a complete weekly meal plan based on your food preference and budget.</div>
+    </div>
+    <div class="content-card">
+      <div class="cc-icon">🏋️</div>
+      <div class="cc-title" data-key="workout_title">Weekly Workout</div>
+      <div class="cc-sub" data-key="workout_desc">Receive a full weekly workout plan for both home and gym based on your goal.</div>
+    </div>
+    <div class="content-card">
+      <div class="cc-icon">📈</div>
+      <div class="cc-title" data-key="progress_title">Progress Tracker</div>
+      <div class="cc-sub" data-key="progress_desc">Log your daily weight, calories and workouts. Watch your transformation with charts.</div>
+    </div>
+    <div class="content-card">
+      <div class="cc-icon">🔥</div>
+      <div class="cc-title" data-key="streak_title">Streak System</div>
+      <div class="cc-sub" data-key="streak_desc">Build a daily logging habit and track your consistency with the streak system.</div>
+    </div>
+  </div>
+
+  <!-- FITNESS TIPS -->
+  <div class="section-label" id="secTips">💡 Key Fitness Tips</div>
+  <div class="tips-table">
+    <div class="tips-table-row header">
+      <div class="tips-table-cell">🇬🇧 English</div>
+      <div class="tips-table-cell">🇮🇳 Hindi / हिन्दी</div>
+      <div class="tips-table-cell">🇮🇳 Bengali / বাংলা</div>
+    </div>
+    <div class="tips-table-row">
+      <div class="tips-table-cell">Drink 3 litres of water daily</div>
+      <div class="tips-table-cell">रोज 3 लीटर पानी पिएं</div>
+      <div class="tips-table-cell">প্রতিদিন ৩ লিটার পানি পান করুন</div>
+    </div>
+    <div class="tips-table-row">
+      <div class="tips-table-cell">Sleep 7–8 hours every night</div>
+      <div class="tips-table-cell">हर रात 7–8 घंटे सोएं</div>
+      <div class="tips-table-cell">প্রতি রাতে ৭-৮ ঘণ্টা ঘুমান</div>
+    </div>
+    <div class="tips-table-row">
+      <div class="tips-table-cell">Exercise at least 4 days a week</div>
+      <div class="tips-table-cell">हफ्ते में कम से कम 4 दिन व्यायाम करें</div>
+      <div class="tips-table-cell">সপ্তাহে অন্তত ৪ দিন ব্যায়াম করুন</div>
+    </div>
+    <div class="tips-table-row">
+      <div class="tips-table-cell">Eat more protein — 1.6g per kg</div>
+      <div class="tips-table-cell">अधिक प्रोटीन खाएं — 1.6 ग्राम प्रति किलो</div>
+      <div class="tips-table-cell">বেশি প্রোটিন খান — প্রতি কেজিতে ১.৬ গ্রাম</div>
+    </div>
+    <div class="tips-table-row">
+      <div class="tips-table-cell">Avoid sugary drinks and junk food</div>
+      <div class="tips-table-cell">मीठे पेय और जंक फूड से बचें</div>
+      <div class="tips-table-cell">মিষ্টি পানীয় ও জাঙ্ক ফুড এড়িয়ে চলুন</div>
+    </div>
+    <div class="tips-table-row">
+      <div class="tips-table-cell">Walk 10,000 steps every day</div>
+      <div class="tips-table-cell">हर दिन 10,000 कदम चलें</div>
+      <div class="tips-table-cell">প্রতিদিন ১০,০০০ পদক্ষেপ হাঁটুন</div>
+    </div>
+  </div>
+
+  <!-- COMMON PHRASES -->
+  <div class="section-label" id="secPhrases">🗣 Common Fitness Phrases</div>
+  <div class="phrase-grid">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;padding:.6rem 1rem;background:var(--surface2);border-radius:12px;margin-bottom:.25rem;">
+      <span style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--green);">English</span>
+      <span style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--orange);">हिन्दी</span>
+      <span style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--purple);">বাংলা</span>
+    </div>
+    <div class="phrase-row"><div class="phrase-cell en">Weight Loss</div><div class="phrase-cell hi">वजन घटाना</div><div class="phrase-cell bn">ওজন কমানো</div></div>
+    <div class="phrase-row"><div class="phrase-cell en">Muscle Gain</div><div class="phrase-cell hi">मांसपेशी बढ़ाना</div><div class="phrase-cell bn">পেশী বৃদ্ধি</div></div>
+    <div class="phrase-row"><div class="phrase-cell en">Daily Workout</div><div class="phrase-cell hi">दैनिक व्यायाम</div><div class="phrase-cell bn">দৈনিক ব্যায়াম</div></div>
+    <div class="phrase-row"><div class="phrase-cell en">Healthy Diet</div><div class="phrase-cell hi">स्वस्थ आहार</div><div class="phrase-cell bn">স্বাস্থ্যকর খাদ্য</div></div>
+    <div class="phrase-row"><div class="phrase-cell en">Body Mass Index</div><div class="phrase-cell hi">बॉडी मास इंडेक्स</div><div class="phrase-cell bn">শরীরের ভর সূচক</div></div>
+    <div class="phrase-row"><div class="phrase-cell en">Stay Consistent</div><div class="phrase-cell hi">निरंतर रहें</div><div class="phrase-cell bn">ধারাবাহিক থাকুন</div></div>
+    <div class="phrase-row"><div class="phrase-cell en">Track Progress</div><div class="phrase-cell hi">प्रगति ट्रैक करें</div><div class="phrase-cell bn">অগ্রগতি ট্র্যাক করুন</div></div>
+    <div class="phrase-row"><div class="phrase-cell en">You Can Do It!</div><div class="phrase-cell hi">आप कर सकते हैं!</div><div class="phrase-cell bn">আপনি পারবেন!</div></div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <p>FitPlan<em>India</em> · <span id="footerText">Your fitness, your language 🌍</span></p>
+</footer>
+
+<script>
+/* ── TRANSLATIONS ── */
+const T = {
+  en: {
+    heroDesc: "Switch between English, Hindi, and Bengali. FitPlan India speaks your language!",
+    secFeatures: "✦ App Features in Your Language",
+    secTips: "💡 Key Fitness Tips",
+    secPhrases: "🗣 Common Fitness Phrases",
+    bmi_title: "BMI Analysis",
+    bmi_desc: "Calculate your Body Mass Index and understand your current health status.",
+    cal_title: "Daily Calories",
+    cal_desc: "Find out exactly how many calories you need to eat every day to reach your goal.",
+    diet_title: "7-Day Diet Plan",
+    diet_desc: "Get a complete weekly meal plan based on your food preference and budget.",
+    workout_title: "Weekly Workout",
+    workout_desc: "Receive a full weekly workout plan for both home and gym based on your goal.",
+    progress_title: "Progress Tracker",
+    progress_desc: "Log your daily weight, calories and workouts. Watch your transformation with charts.",
+    streak_title: "Streak System",
+    streak_desc: "Build a daily logging habit and track your consistency with the streak system.",
+    footerText: "Your fitness, your language 🌍",
+  },
+  hi: {
+    heroDesc: "अंग्रेजी, हिंदी और बंगाली के बीच स्विच करें। FitPlan India आपकी भाषा बोलता है!",
+    secFeatures: "✦ आपकी भाषा में ऐप की विशेषताएं",
+    secTips: "💡 मुख्य फिटनेस टिप्स",
+    secPhrases: "🗣 सामान्य फिटनेस वाक्यांश",
+    bmi_title: "BMI विश्लेषण",
+    bmi_desc: "अपना बॉडी मास इंडेक्स जानें और अपनी वर्तमान स्वास्थ्य स्थिति को समझें।",
+    cal_title: "दैनिक कैलोरी",
+    cal_desc: "पता लगाएं कि अपने लक्ष्य तक पहुंचने के लिए आपको हर दिन कितनी कैलोरी खानी चाहिए।",
+    diet_title: "7-दिन का डाइट प्लान",
+    diet_desc: "अपनी खाद्य प्राथमिकता और बजट के आधार पर एक पूर्ण साप्ताहिक मील प्लान पाएं।",
+    workout_title: "साप्ताहिक वर्कआउट",
+    workout_desc: "अपने लक्ष्य के आधार पर घर और जिम दोनों के लिए पूर्ण साप्ताहिक वर्कआउट प्लान पाएं।",
+    progress_title: "प्रगति ट्रैकर",
+    progress_desc: "अपना दैनिक वजन, कैलोरी और वर्कआउट लॉग करें। चार्ट से अपना बदलाव देखें।",
+    streak_title: "स्ट्रीक सिस्टम",
+    streak_desc: "रोज लॉग करने की आदत बनाएं और स्ट्रीक सिस्टम से अपनी निरंतरता ट्रैक करें।",
+    footerText: "आपकी फिटनेस, आपकी भाषा 🌍",
+  },
+  bn: {
+    heroDesc: "ইংরেজি, হিন্দি এবং বাংলার মধ্যে সুইচ করুন। FitPlan India আপনার ভাষায় কথা বলে!",
+    secFeatures: "✦ আপনার ভাষায় অ্যাপের বৈশিষ্ট্য",
+    secTips: "💡 মূল ফিটনেস টিপস",
+    secPhrases: "🗣 সাধারণ ফিটনেস বাক্যাংশ",
+    bmi_title: "BMI বিশ্লেষণ",
+    bmi_desc: "আপনার বডি মাস ইন্ডেক্স গণনা করুন এবং আপনার বর্তমান স্বাস্থ্য অবস্থা বুঝুন।",
+    cal_title: "দৈনিক ক্যালোরি",
+    cal_desc: "আপনার লক্ষ্যে পৌঁছাতে প্রতিদিন ঠিক কতটুকু ক্যালোরি খেতে হবে তা জানুন।",
+    diet_title: "৭ দিনের ডায়েট প্ল্যান",
+    diet_desc: "আপনার খাদ্য পছন্দ এবং বাজেটের উপর ভিত্তি করে একটি সম্পূর্ণ সাপ্তাহিক খাবারের পরিকল্পনা পান।",
+    workout_title: "সাপ্তাহিক ওয়ার্কআউট",
+    workout_desc: "আপনার লক্ষ্যের উপর ভিত্তি করে বাড়ি ও জিম উভয়ের জন্য সম্পূর্ণ সাপ্তাহিক ওয়ার্কআউট প্ল্যান পান।",
+    progress_title: "অগ্রগতি ট্র্যাকার",
+    progress_desc: "আপনার দৈনিক ওজন, ক্যালোরি এবং ওয়ার্কআউট লগ করুন। চার্টের মাধ্যমে আপনার পরিবর্তন দেখুন।",
+    streak_title: "স্ট্রিক সিস্টেম",
+    streak_desc: "প্রতিদিন লগ করার অভ্যাস গড়ুন এবং স্ট্রিক সিস্টেমের মাধ্যমে আপনার ধারাবাহিকতা ট্র্যাক করুন।",
+    footerText: "আপনার ফিটনেস, আপনার ভাষা 🌍",
+  }
+};
+
+let currentLang = localStorage.getItem('fp_lang') || 'en';
+
+function setLang(lang){
+  currentLang = lang;
+  localStorage.setItem('fp_lang', lang);
+
+  // Update body font
+  document.body.classList.remove('lang-en','lang-hi','lang-bn');
+  document.body.classList.add('lang-'+lang);
+
+  // Update lang buttons
+  document.querySelectorAll('.lang-btn').forEach(b=>{
+    b.classList.remove('active');
+    if(b.classList.contains(lang)) b.classList.add('active');
+  });
+
+  // Update all translated elements
+  const t = T[lang];
+  document.getElementById('heroDesc').textContent = t.heroDesc;
+  document.getElementById('secFeatures').textContent = t.secFeatures;
+  document.getElementById('secTips').textContent = t.secTips;
+  document.getElementById('secPhrases').textContent = t.secPhrases;
+  document.getElementById('footerText').textContent = t.footerText;
+
+  document.querySelectorAll('[data-key]').forEach(el=>{
+    const key = el.getAttribute('data-key');
+    if(t[key]) el.textContent = t[key];
+  });
+}
+
+/* ── THEME ── */
+const themeBtn=document.getElementById('themeBtn');
+function applyTheme(t){document.documentElement.setAttribute('data-theme',t);themeBtn.textContent=t==='dark'?'☀':'☽';localStorage.setItem('fpTheme',t);}
+themeBtn.addEventListener('click',()=>applyTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark'));
+applyTheme(localStorage.getItem('fpTheme')||'dark');
+
+setLang(currentLang);
+</script>
+</body>
+</html>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Recommendations — FitPlan India</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+:root{
+  --green:#6EE7B7;--blue:#3B82F6;--purple:#A78BFA;
+  --orange:#FB923C;--red:#F87171;--yellow:#FCD34D;
+  --grad:linear-gradient(135deg,#6EE7B7,#3B82F6);
+  --grad-warm:linear-gradient(135deg,#FB923C,#F87171);
+  --grad-purple:linear-gradient(135deg,#A78BFA,#6EE7B7);
+  --font-d:'Syne',sans-serif;--font-b:'DM Sans',sans-serif;
+  --ease:cubic-bezier(0.4,0,0.2,1);--bounce:cubic-bezier(0.34,1.56,0.64,1);
+}
+[data-theme="dark"]{--bg:#070b12;--surface:rgba(255,255,255,0.04);--surface2:rgba(255,255,255,0.07);--border:rgba(255,255,255,0.08);--border2:rgba(167,139,250,0.35);--text:#F0F6FF;--text2:#7A8FA8;--text3:#3A4A60;--shadow:0 8px 40px rgba(0,0,0,0.6);--nav:rgba(7,11,18,0.55);}
+[data-theme="light"]{--bg:#EEF2FF;--surface:rgba(255,255,255,0.6);--surface2:rgba(255,255,255,0.85);--border:rgba(0,0,0,0.07);--border2:rgba(167,139,250,0.3);--text:#111827;--text2:#4B5563;--text3:#9CA3AF;--shadow:0 8px 32px rgba(0,40,120,0.1);--nav:rgba(238,242,255,0.55);}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-b);background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;transition:background .4s,color .4s;padding-top:88px;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 60% at 20% 15%,rgba(167,139,250,0.08) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 80% 80%,rgba(59,130,246,0.07) 0%,transparent 60%),radial-gradient(ellipse 50% 40% at 50% 50%,rgba(110,231,183,0.04) 0%,transparent 60%);pointer-events:none;z-index:0;}
+body>*{position:relative;z-index:1;}
+
+/* NAVBAR */
+.nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);width:calc(100% - 48px);max-width:1100px;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.5rem;background:var(--nav);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);border:1px solid rgba(255,255,255,0.1);border-radius:100px;box-shadow:0 8px 40px rgba(0,0,0,0.4),inset 0 1px 0 rgba(255,255,255,0.07);transition:background .4s,border-color .4s;}
+[data-theme="light"] .nav{border-color:rgba(59,130,246,0.15);box-shadow:0 8px 40px rgba(0,40,100,0.12),inset 0 1px 0 rgba(255,255,255,0.6);}
+.nav-left{display:flex;align-items:center;gap:.75rem;}
+.nav-logo{width:34px;height:34px;background:var(--grad);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;box-shadow:0 4px 16px rgba(110,231,183,.3);}
+.nav-brand{font-family:var(--font-d);font-weight:800;font-size:1.1rem;letter-spacing:-.02em;color:var(--text);}
+.nav-brand em{font-style:normal;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.nav-links{display:flex;align-items:center;gap:.25rem;}
+.nav-link{display:flex;align-items:center;gap:.4rem;padding:.45rem 1rem;border-radius:100px;font-size:.82rem;font-weight:500;color:var(--text2);text-decoration:none;background:none;border:1px solid transparent;cursor:pointer;transition:all .25s;font-family:var(--font-b);white-space:nowrap;}
+.nav-link:hover,.nav-link.active{color:var(--text);background:rgba(255,255,255,0.07);border-color:rgba(255,255,255,0.1);}
+[data-theme="light"] .nav-link:hover,[data-theme="light"] .nav-link.active{background:rgba(59,130,246,0.08);border-color:rgba(59,130,246,0.18);color:#111827;}
+.nav-link.active-smart{background:linear-gradient(135deg,rgba(167,139,250,.12),rgba(59,130,246,.08));border-color:rgba(167,139,250,.3);color:var(--purple);}
+.nav-link.exercise-lnk{background:linear-gradient(135deg,rgba(110,231,183,.1),rgba(59,130,246,.07));border-color:rgba(110,231,183,.2);color:var(--green);}
+.nav-link.progress-lnk{background:linear-gradient(135deg,rgba(251,146,60,.1),rgba(248,113,113,.07));border-color:rgba(251,146,60,.2);color:var(--orange);}
+.theme-btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);cursor:pointer;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:all .2s;color:var(--text2);}
+.theme-btn:hover{border-color:var(--border2);color:var(--text);}
+.nav-right{display:flex;align-items:center;gap:.5rem;}
+@media(max-width:700px){.nav{border-radius:20px;width:calc(100% - 24px);top:10px;padding:.65rem 1rem;}.nav-link .nl{display:none;}.nav-link{padding:.45rem .65rem;}}
+
+/* HERO */
+.hero{padding:3rem 1.5rem 2rem;text-align:center;}
+.hero-badge{display:inline-block;padding:.35rem 1rem;border:1px solid rgba(167,139,250,.35);border-radius:100px;font-size:.78rem;color:var(--purple);letter-spacing:.08em;background:rgba(167,139,250,.07);margin-bottom:1.25rem;animation:fadeUp .7s both .1s;}
+.hero-title{font-family:var(--font-d);font-size:clamp(2rem,5vw,3.2rem);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin-bottom:.75rem;animation:fadeUp .7s both .2s;}
+.grad-purple{background:var(--grad-purple);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-desc{color:var(--text2);font-size:.95rem;max-width:480px;margin:0 auto;animation:fadeUp .7s both .3s;}
+
+/* MAIN */
+.main{max-width:1100px;margin:0 auto;padding:2rem 1.5rem 4rem;}
+.section-label{font-family:var(--font-d);font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text2);margin-bottom:1rem;display:flex;align-items:center;gap:.6rem;}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border);}
+
+/* DAILY QUOTE */
+.quote-card{background:linear-gradient(135deg,rgba(167,139,250,.1),rgba(59,130,246,.07));border:1px solid rgba(167,139,250,.25);border-radius:24px;padding:2.25rem;margin-bottom:2rem;backdrop-filter:blur(20px);position:relative;overflow:hidden;animation:fadeUp .6s both .1s;}
+.quote-card::before{content:'❝';position:absolute;top:-.5rem;left:1.25rem;font-size:6rem;color:rgba(167,139,250,.08);font-family:Georgia,serif;line-height:1;}
+.quote-date{font-size:.72rem;color:var(--purple);font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.75rem;}
+.quote-text{font-family:var(--font-d);font-size:1.3rem;font-weight:700;line-height:1.4;margin-bottom:.75rem;position:relative;z-index:1;}
+.quote-author{font-size:.82rem;color:var(--text2);}
+.quote-refresh{position:absolute;top:1.25rem;right:1.25rem;background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.25);color:var(--purple);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;transition:all .25s var(--bounce);}
+.quote-refresh:hover{transform:rotate(180deg);background:rgba(167,139,250,.22);}
+
+/* SMART FORM */
+.smart-form-card{background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:2rem;margin-bottom:2rem;backdrop-filter:blur(20px);animation:fadeUp .6s both .2s;}
+.smart-form-grid{display:grid;grid-template-columns:repeat(3,1fr) 1fr;gap:1rem;align-items:end;margin-bottom:1rem;}
+.sf-field label{display:block;font-size:.78rem;font-weight:600;color:var(--text2);margin-bottom:.45rem;}
+.sf-field select,.sf-field input{width:100%;padding:.75rem 1rem;background:var(--surface2);border:1px solid var(--border);border-radius:12px;color:var(--text);font-family:var(--font-b);font-size:.9rem;transition:all .2s;backdrop-filter:blur(8px);}
+.sf-field select:focus,.sf-field input:focus{outline:none;border-color:var(--border2);}
+.sf-field select option{background:#0d1424;color:#F0F6FF;}
+.btn-analyse{padding:.75rem 1.5rem;background:var(--grad-purple);border:none;border-radius:12px;color:#fff;font-family:var(--font-d);font-size:.88rem;font-weight:700;cursor:pointer;transition:all .25s var(--bounce);white-space:nowrap;width:100%;}
+.btn-analyse:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(167,139,250,.3);}
+
+/* RECOMMENDATIONS */
+.recs-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:2rem;animation:fadeUp .6s both;}
+.rec-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:1.5rem;backdrop-filter:blur(16px);transition:all .25s var(--bounce);}
+.rec-card:hover{transform:translateY(-4px);border-color:var(--border2);}
+.rec-icon-wrap{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1rem;}
+.rec-icon-green{background:rgba(110,231,183,.12);border:1px solid rgba(110,231,183,.2);}
+.rec-icon-orange{background:rgba(251,146,60,.12);border:1px solid rgba(251,146,60,.2);}
+.rec-icon-blue{background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.2);}
+.rec-icon-purple{background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.2);}
+.rec-icon-red{background:rgba(248,113,113,.12);border:1px solid rgba(248,113,113,.2);}
+.rec-icon-yellow{background:rgba(252,211,77,.12);border:1px solid rgba(252,211,77,.2);}
+.rec-title{font-family:var(--font-d);font-size:.95rem;font-weight:800;margin-bottom:.4rem;}
+.rec-text{font-size:.82rem;color:var(--text2);line-height:1.6;}
+.rec-tag{display:inline-block;padding:.2rem .65rem;border-radius:100px;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-top:.65rem;}
+.tag-green{background:rgba(110,231,183,.12);color:var(--green);}
+.tag-orange{background:rgba(251,146,60,.12);color:var(--orange);}
+.tag-blue{background:rgba(59,130,246,.12);color:var(--blue);}
+.tag-purple{background:rgba(167,139,250,.12);color:var(--purple);}
+.tag-red{background:rgba(248,113,113,.12);color:var(--red);}
+
+/* STREAK MINI */
+.streak-row{display:grid;grid-template-columns:repeat(7,1fr);gap:.5rem;margin-bottom:2rem;}
+.streak-day{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:.6rem .3rem;text-align:center;font-size:.65rem;color:var(--text3);}
+.streak-day.done{background:rgba(110,231,183,.12);border-color:rgba(110,231,183,.25);color:var(--green);}
+.streak-day.today{border-color:rgba(251,146,60,.4);color:var(--orange);}
+.sd-icon{font-size:1rem;display:block;margin-bottom:.25rem;}
+.sd-lbl{font-weight:600;font-size:.6rem;}
+
+/* DEFAULT STATE */
+.default-state{text-align:center;padding:3rem 2rem;color:var(--text3);}
+.default-icon{font-size:3rem;margin-bottom:1rem;}
+
+/* FOOTER */
+.footer{text-align:center;padding:2rem;border-top:1px solid var(--border);font-size:.8rem;color:var(--text3);}
+.footer em{font-style:normal;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes cardUp{from{opacity:0;transform:translateY(30px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(max-width:768px){.smart-form-grid{grid-template-columns:1fr 1fr;}.recs-grid{grid-template-columns:1fr;}}
+@media(max-width:480px){.smart-form-grid{grid-template-columns:1fr;}.streak-row{grid-template-columns:repeat(4,1fr);}}
+::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-thumb{background:var(--border);border-radius:100px;}
+::selection{background:rgba(167,139,250,.25);}
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="nav">
+  <div class="nav-left">
+    <div class="nav-logo">💪</div>
+    <span class="nav-brand">FitPlan<em>India</em></span>
+  </div>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">🏠 <span class="nl">Planner</span></a>
+    <a href="exercise.html" class="nav-link exercise-lnk">🏋️ <span class="nl">Exercise</span></a>
+    <a href="progress.html" class="nav-link progress-lnk">📊 <span class="nl">Progress</span></a>
+    <a href="smart.html" class="nav-link active-smart">🧠 <span class="nl">Smart</span></a>
+    <a href="language.html" class="nav-link">🌍 <span class="nl">Language</span></a>
+  </div>
+  <div class="nav-right">
+    <button class="theme-btn" id="themeBtn">☀</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">🧠 AI-Powered Insights</div>
+  <h1 class="hero-title">Smart Tips.<br/><span class="grad-purple">Real Results.</span></h1>
+  <p class="hero-desc">Get personalised recommendations based on your body metrics, plus a fresh daily motivational quote.</p>
+</section>
+
+<main class="main">
+
+  <!-- DAILY QUOTE -->
+  <div class="section-label">💬 Daily Motivation</div>
+  <div class="quote-card">
+    <button class="quote-refresh" onclick="newQuote()" title="New quote">↻</button>
+    <div class="quote-date" id="quoteDate"></div>
+    <div class="quote-text" id="quoteText"></div>
+    <div class="quote-author" id="quoteAuthor"></div>
+  </div>
+
+  <!-- STREAK WEEK -->
+  <div class="section-label">🔥 This Week's Streak</div>
+  <div class="streak-row" id="streakRow"></div>
+
+  <!-- SMART FORM -->
+  <div class="section-label">🧠 Get Smart Recommendations</div>
+  <div class="smart-form-card">
+    <div class="smart-form-grid">
+      <div class="sf-field">
+        <label>⚖️ Current Weight (kg)</label>
+        <input type="number" id="sfWeight" placeholder="e.g. 72" min="30" max="300"/>
+      </div>
+      <div class="sf-field">
+        <label>📏 Height (cm)</label>
+        <input type="number" id="sfHeight" placeholder="e.g. 170" min="100" max="250"/>
+      </div>
+      <div class="sf-field">
+        <label>🎯 Your Goal</label>
+        <select id="sfGoal">
+          <option value="">Select goal</option>
+          <option value="loss">Weight Loss</option>
+          <option value="gain">Muscle Gain</option>
+          <option value="maintain">Maintain</option>
+        </select>
+      </div>
+      <div class="sf-field">
+        <button class="btn-analyse" onclick="analyse()">🔍 Analyse</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RECS OUTPUT -->
+  <div id="recsOutput">
+    <div class="default-state">
+      <div class="default-icon">🔍</div>
+      <p>Enter your details above and click Analyse to get your personalised recommendations.</p>
+    </div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <p>FitPlan<em>India</em> · Smart Recommendations · Stay Motivated 💪</p>
+</footer>
+
+<script>
+/* ── QUOTES ── */
+const QUOTES = [
+  {text:"The body achieves what the mind believes.",author:"— Napoleon Hill"},
+  {text:"Take care of your body. It's the only place you have to live.",author:"— Jim Rohn"},
+  {text:"Fitness is not about being better than someone else. It's about being better than you used to be.",author:"— Khloe Kardashian"},
+  {text:"The secret of getting ahead is getting started.",author:"— Mark Twain"},
+  {text:"Strength does not come from the body. It comes from the will of the soul.",author:"— Mahatma Gandhi"},
+  {text:"Every workout is progress, no matter how small.",author:"— FitPlan India"},
+  {text:"Your health is an investment, not an expense.",author:"— Unknown"},
+  {text:"Don't wish for it. Work for it.",author:"— Unknown"},
+  {text:"The pain you feel today will be the strength you feel tomorrow.",author:"— Arnold Schwarzenegger"},
+  {text:"It does not matter how slowly you go as long as you do not stop.",author:"— Confucius"},
+  {text:"You don't have to be great to start, but you have to start to be great.",author:"— Zig Ziglar"},
+  {text:"Success usually comes to those who are too busy to be looking for it.",author:"— Henry David Thoreau"},
+  {text:"One workout at a time. One meal at a time. One day at a time.",author:"— FitPlan India"},
+  {text:"Discipline is choosing between what you want now and what you want most.",author:"— Augusta F. Kantra"},
+  {text:"Wake up with determination. Go to bed with satisfaction.",author:"— Unknown"},
+];
+
+let currentQuoteIdx = -1;
+function getQuoteOfDay(){
+  const day = new Date().getDay();
+  return QUOTES[day % QUOTES.length];
+}
+function newQuote(){
+  let idx;
+  do{ idx = Math.floor(Math.random()*QUOTES.length); } while(idx===currentQuoteIdx);
+  currentQuoteIdx = idx;
+  setQuote(QUOTES[idx]);
+}
+function setQuote(q){
+  document.getElementById('quoteText').textContent = q.text;
+  document.getElementById('quoteAuthor').textContent = q.author;
+}
+function initQuote(){
+  const q = getQuoteOfDay();
+  currentQuoteIdx = QUOTES.indexOf(q);
+  document.getElementById('quoteDate').textContent = new Date().toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  setQuote(q);
+}
+
+/* ── STREAK WEEK ── */
+function renderStreakWeek(){
+  const data = JSON.parse(localStorage.getItem('fp_progress')||'[]');
+  const days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const today = new Date();
+  const row = document.getElementById('streakRow');
+  let html='';
+  for(let i=6;i>=0;i--){
+    const d=new Date(today); d.setDate(d.getDate()-i);
+    const dateStr=d.toISOString().split('T')[0];
+    const hasEntry=data.some(e=>e.date===dateStr);
+    const isToday=i===0;
+    const dayName=days[d.getDay()];
+    html+=`<div class="streak-day${hasEntry?' done':''}${isToday?' today':''}">
+      <span class="sd-icon">${hasEntry?'✅':isToday?'👈':'○'}</span>
+      <span class="sd-lbl">${dayName}</span>
+    </div>`;
+  }
+  row.innerHTML=html;
+}
+
+/* ── SMART ANALYSE ── */
+const RECS = {
+  loss: [
+    {icon:'🥗',wrap:'rec-icon-green',title:'Eat in a Calorie Deficit',text:'Reduce your daily intake by 300–500 kcal below your TDEE. Focus on whole foods, vegetables, and lean protein.',tag:'tag-green',tagText:'Nutrition'},
+    {icon:'🏃',wrap:'rec-icon-orange',title:'Add Daily Cardio',text:'30–45 minutes of moderate cardio (walking, cycling, jogging) 5–6 days a week burns significant fat.',tag:'tag-orange',tagText:'Cardio'},
+    {icon:'💧',wrap:'rec-icon-blue',title:'Drink 3L Water Daily',text:'Staying hydrated boosts metabolism by up to 30% and reduces false hunger signals.',tag:'tag-blue',tagText:'Hydration'},
+    {icon:'😴',wrap:'rec-icon-purple',title:'Sleep 7–8 Hours',text:'Poor sleep raises cortisol which stores belly fat. Sleep before 11 PM for best results.',tag:'tag-purple',tagText:'Recovery'},
+    {icon:'🚫',wrap:'rec-icon-red',title:'Avoid Sugary Drinks',text:'Soft drinks, packaged juices have 150–300 empty calories. Replace with lemon water or green tea.',tag:'tag-red',tagText:'Avoid'},
+    {icon:'📊',wrap:'rec-icon-green',title:'Track Your Progress',text:'Weigh yourself every Monday morning. Track calories for 2 weeks. What gets measured gets improved.',tag:'tag-green',tagText:'Tracking'},
+  ],
+  gain: [
+    {icon:'🍗',wrap:'rec-icon-green',title:'Eat in a Calorie Surplus',text:'Consume 300–500 kcal above TDEE. Aim for 1.6–2.2g of protein per kg bodyweight daily.',tag:'tag-green',tagText:'Nutrition'},
+    {icon:'🏋️',wrap:'rec-icon-orange',title:'Progressive Overload',text:'Add 2.5–5 kg to your lifts every 1–2 weeks. Stagnation means zero muscle growth.',tag:'tag-orange',tagText:'Training'},
+    {icon:'😴',wrap:'rec-icon-purple',title:'Sleep 8–9 Hours',text:'Muscles grow during sleep — specifically during deep sleep when growth hormone peaks.',tag:'tag-purple',tagText:'Recovery'},
+    {icon:'🥜',wrap:'rec-icon-blue',title:'Healthy Calorie Sources',text:'Peanut butter, dry fruits, whole milk, eggs, bananas, oats — calorie-dense and nutritious.',tag:'tag-blue',tagText:'Food'},
+    {icon:'⏱️',wrap:'rec-icon-yellow',title:'Limit Excessive Cardio',text:'Too much cardio burns muscle. Keep cardio to 20 min/session, 2–3 days/week maximum.',tag:'tag-orange',tagText:'Caution'},
+    {icon:'📅',wrap:'rec-icon-green',title:'Train 4–5 Days/Week',text:'Focus on compound movements: Bench Press, Deadlift, Squat, Pull-ups, Shoulder Press.',tag:'tag-green',tagText:'Plan'},
+  ],
+  maintain: [
+    {icon:'⚖️',wrap:'rec-icon-blue',title:'Match Your TDEE',text:'Eat roughly equal to your Total Daily Energy Expenditure. Track weekly, not daily.',tag:'tag-blue',tagText:'Calories'},
+    {icon:'🔄',wrap:'rec-icon-green',title:'Stay Consistent',text:'Even a 15-minute workout beats skipping. Consistency over intensity is the key to maintenance.',tag:'tag-green',tagText:'Habit'},
+    {icon:'🧘',wrap:'rec-icon-purple',title:'Add Yoga or Stretching',text:'Flexibility training reduces injury risk and improves body composition long-term.',tag:'tag-purple',tagText:'Mobility'},
+    {icon:'🥗',wrap:'rec-icon-orange',title:'Balanced Macro Split',text:'Aim for 40% carbs, 30% protein, 30% fat. Avoid extreme diets — they backfire.',tag:'tag-orange',tagText:'Nutrition'},
+    {icon:'😴',wrap:'rec-icon-purple',title:'Prioritise Recovery',text:'Rest days are not lazy days. Muscles repair during rest. Schedule 2 rest days/week.',tag:'tag-purple',tagText:'Recovery'},
+    {icon:'📊',wrap:'rec-icon-blue',title:'Monthly Check-in',text:'Weigh yourself once a week. If weight trends up/down for 3+ weeks, adjust calories slightly.',tag:'tag-blue',tagText:'Tracking'},
+  ]
+};
+
+function getBMICategory(bmi){
+  if(bmi<18.5) return{label:'Underweight',color:'#3B82F6'};
+  if(bmi<25)   return{label:'Normal Weight',color:'#6EE7B7'};
+  if(bmi<30)   return{label:'Overweight',color:'#FB923C'};
+  return{label:'Obese',color:'#F87171'};
+}
+
+function analyse(){
+  const w=parseFloat(document.getElementById('sfWeight').value);
+  const h=parseFloat(document.getElementById('sfHeight').value);
+  const goal=document.getElementById('sfGoal').value;
+  if(!w||!h||!goal){alert('Please fill all 3 fields!');return;}
+  const bmi=(w/((h/100)**2)).toFixed(1);
+  const bmiCat=getBMICategory(parseFloat(bmi));
+  const recs=RECS[goal]||RECS.maintain;
+  const goalLabel={loss:'Weight Loss',gain:'Muscle Gain',maintain:'Maintain Weight'}[goal];
+
+  document.getElementById('recsOutput').innerHTML=`
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:1.5rem;margin-bottom:1.5rem;backdrop-filter:blur(16px);display:flex;gap:2rem;align-items:center;flex-wrap:wrap;animation:fadeUp .5s both;">
+      <div style="text-align:center;">
+        <div style="font-family:var(--font-d);font-size:2.5rem;font-weight:800;color:${bmiCat.color};">${bmi}</div>
+        <div style="font-size:.75rem;color:var(--text2);">Your BMI</div>
+      </div>
+      <div style="height:40px;width:1px;background:var(--border);"></div>
+      <div>
+        <div style="font-family:var(--font-d);font-size:1rem;font-weight:800;color:${bmiCat.color};">${bmiCat.label}</div>
+        <div style="font-size:.8rem;color:var(--text2);margin-top:3px;">Goal: ${goalLabel}</div>
+      </div>
+      <div style="margin-left:auto;padding:.4rem 1rem;border-radius:100px;background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.25);color:var(--purple);font-family:var(--font-d);font-size:.75rem;font-weight:700;">6 Recommendations</div>
+    </div>
+    <div class="recs-grid">
+      ${recs.map(r=>`
+        <div class="rec-card">
+          <div class="rec-icon-wrap ${r.wrap}">${r.icon}</div>
+          <div class="rec-title">${r.title}</div>
+          <div class="rec-text">${r.text}</div>
+          <span class="rec-tag ${r.tag}">${r.tagText}</span>
+        </div>`).join('')}
+    </div>`;
+}
+
+/* ── THEME ── */
+const themeBtn=document.getElementById('themeBtn');
+function applyTheme(t){document.documentElement.setAttribute('data-theme',t);themeBtn.textContent=t==='dark'?'☀':'☽';localStorage.setItem('fpTheme',t);}
+themeBtn.addEventListener('click',()=>applyTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark'));
+applyTheme(localStorage.getItem('fpTheme')||'dark');
+
+/* ── INIT ── */
+initQuote();
+renderStreakWeek();
+
+// Pre-fill from planner data if exists
+try{
+  const fd=JSON.parse(localStorage.getItem('fpFormData')||'{}');
+  if(fd.weight) document.getElementById('sfWeight').value=fd.weight;
+  if(fd.height) document.getElementById('sfHeight').value=fd.height;
+  if(fd.goal)   document.getElementById('sfGoal').value=fd.goal;
+}catch(e){}
+</script>
+</body>
+</html>
