@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Analytics Dashboard — FitPlan India</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <style>
+:root{--green:#6EE7B7;--blue:#3B82F6;--purple:#A78BFA;--orange:#FB923C;--red:#F87171;--yellow:#FCD34D;--grad:linear-gradient(135deg,#6EE7B7,#3B82F6);--grad-warm:linear-gradient(135deg,#FB923C,#F87171);--font-d:'Syne',sans-serif;--font-b:'DM Sans',sans-serif;--bounce:cubic-bezier(0.34,1.56,0.64,1);--ease:cubic-bezier(0.4,0,0.2,1);}
+[data-theme="dark"]{--bg:#070b12;--surface:rgba(255,255,255,0.04);--surface2:rgba(255,255,255,0.07);--border:rgba(255,255,255,0.08);--border2:rgba(110,231,183,0.28);--text:#F0F6FF;--text2:#7A8FA8;--text3:#3A4A60;--nav:rgba(7,11,18,0.55);}
+[data-theme="light"]{--bg:#EEF2FF;--surface:rgba(255,255,255,0.6);--surface2:rgba(255,255,255,0.85);--border:rgba(0,0,0,0.07);--border2:rgba(59,130,246,0.3);--text:#111827;--text2:#4B5563;--text3:#9CA3AF;--nav:rgba(238,242,255,0.55);}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-b);background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;transition:background .4s,color .4s;padding-top:88px;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 60% at 15% 10%,rgba(59,130,246,0.07) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 85% 80%,rgba(110,231,183,0.06) 0%,transparent 60%);pointer-events:none;z-index:0;}
+body>*{position:relative;z-index:1;}
+.nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);width:calc(100% - 48px);max-width:1100px;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.5rem;background:var(--nav);backdrop-filter:blur(28px);border:1px solid rgba(255,255,255,0.1);border-radius:100px;box-shadow:0 8px 40px rgba(0,0,0,0.4);}
+[data-theme="light"] .nav{border-color:rgba(59,130,246,0.15);}
+.nav-left{display:flex;align-items:center;gap:.75rem;}
+.nav-logo{width:34px;height:34px;background:var(--grad);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+.nav-brand{font-family:var(--font-d);font-weight:800;font-size:1.1rem;color:var(--text);}
+.nav-brand em{font-style:normal;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.nav-links{display:flex;align-items:center;gap:.2rem;}
+.nav-link{display:flex;align-items:center;gap:.35rem;padding:.4rem .85rem;border-radius:100px;font-size:.78rem;font-weight:500;color:var(--text2);text-decoration:none;border:1px solid transparent;cursor:pointer;transition:all .25s;font-family:var(--font-b);white-space:nowrap;background:none;}
+.nav-link:hover{color:var(--text);background:rgba(255,255,255,0.07);border-color:rgba(255,255,255,0.1);}
+.active-dash{background:linear-gradient(135deg,rgba(59,130,246,.15),rgba(110,231,183,.08))!important;border-color:rgba(59,130,246,.35)!important;color:var(--blue)!important;}
+.theme-btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);cursor:pointer;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:all .2s;color:var(--text2);}
+.nav-right{display:flex;align-items:center;gap:.5rem;}
+@media(max-width:800px){.nav{border-radius:20px;width:calc(100% - 20px);top:10px;padding:.6rem .9rem;}.nav-link .nl{display:none;}.nav-link{padding:.4rem .55rem;}}
+.hero{padding:2.5rem 1.5rem 1.5rem;text-align:center;}
+.hero-badge{display:inline-block;padding:.3rem .9rem;border:1px solid rgba(59,130,246,.35);border-radius:100px;font-size:.75rem;color:var(--blue);background:rgba(59,130,246,.07);margin-bottom:1rem;animation:fadeUp .7s both .1s;}
+.hero-title{font-family:var(--font-d);font-size:clamp(1.8rem,5vw,3rem);font-weight:800;letter-spacing:-.03em;margin-bottom:.5rem;animation:fadeUp .7s both .2s;}
+.grad-blue{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-desc{color:var(--text2);font-size:.9rem;animation:fadeUp .7s both .3s;}
+.main{max-width:1100px;margin:0 auto;padding:1.5rem 1.5rem 4rem;}
+.sec-label{font-family:var(--font-d);font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text2);margin-bottom:.9rem;display:flex;align-items:center;gap:.6rem;}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border);}
+.no-profile{background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:3rem;text-align:center;backdrop-filter:blur(16px);}
+.no-profile-icon{font-size:3rem;margin-bottom:1rem;}
+.no-profile h3{font-family:var(--font-d);font-size:1.2rem;font-weight:800;margin-bottom:.5rem;}
+.no-profile p{color:var(--text2);font-size:.88rem;margin-bottom:1.5rem;}
+.btn-go{padding:.7rem 1.8rem;background:var(--grad);border:none;border-radius:12px;color:#070b12;font-family:var(--font-d);font-size:.9rem;font-weight:800;cursor:pointer;text-decoration:none;display:inline-block;transition:all .25s var(--bounce);}
+.btn-go:hover{transform:translateY(-3px);}
+.prediction-wrap{display:grid;grid-template-columns:180px 1fr;gap:2rem;background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:2rem;backdrop-filter:blur(20px);margin-bottom:1.5rem;align-items:center;animation:fadeUp .6s both .1s;}
+.ring-wrap{position:relative;width:160px;height:160px;}
+.ring-wrap svg{width:100%;height:100%;transform:rotate(-90deg);}
+.ring-bg-c{fill:none;stroke:var(--border);stroke-width:10;}
+.ring-prog{fill:none;stroke:url(#rg);stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset 1.5s var(--ease);}
+.ring-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;}
+.ring-pct{font-family:var(--font-d);font-size:1.8rem;font-weight:800;line-height:1;}
+.ring-lbl{font-size:.62rem;color:var(--text2);margin-top:2px;}
+.pred-info h3{font-family:var(--font-d);font-size:1.2rem;font-weight:800;margin-bottom:.4rem;}
+.pred-info p{color:var(--text2);font-size:.85rem;line-height:1.6;margin-bottom:1rem;}
+.pred-stats{display:flex;gap:1.5rem;flex-wrap:wrap;}
+.p-stat-val{font-family:var(--font-d);font-size:1.4rem;font-weight:800;}
+.p-stat-lbl{font-size:.65rem;color:var(--text2);}
+.insights-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;}
+.ins-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.1rem;backdrop-filter:blur(12px);display:flex;align-items:center;gap:.9rem;transition:all .25s var(--bounce);animation:cardUp .5s both;}
+.ins-card:hover{transform:translateY(-3px);border-color:var(--border2);}
+.ins-card.success{border-left:3px solid var(--green);background:rgba(110,231,183,.04);}
+.ins-card.warning{border-left:3px solid var(--orange);background:rgba(251,146,60,.04);}
+.ins-card.info{border-left:3px solid var(--blue);background:rgba(59,130,246,.04);}
+.ins-icon{font-size:1.4rem;width:36px;text-align:center;flex-shrink:0;}
+.ins-title{font-family:var(--font-d);font-size:.85rem;font-weight:800;margin-bottom:.15rem;}
+.ins-text{font-size:.75rem;color:var(--text2);line-height:1.4;}
+.ins-val{font-family:var(--font-d);font-size:.95rem;font-weight:800;white-space:nowrap;margin-left:auto;}
+.ins-val.g{color:var(--green);}.ins-val.o{color:var(--orange);}.ins-val.b{color:var(--blue);}
+.alerts-list{display:flex;flex-direction:column;gap:.7rem;margin-bottom:1.5rem;}
+.al-card{display:flex;align-items:flex-start;gap:.85rem;padding:.9rem 1.1rem;border-radius:12px;border:1px solid;backdrop-filter:blur(10px);animation:slideIn .4s both;}
+.al-card.success{background:rgba(110,231,183,.06);border-color:rgba(110,231,183,.2);}
+.al-card.warning{background:rgba(251,146,60,.06);border-color:rgba(251,146,60,.2);}
+.al-card.danger{background:rgba(248,113,113,.06);border-color:rgba(248,113,113,.25);}
+.al-card.info{background:rgba(59,130,246,.06);border-color:rgba(59,130,246,.2);}
+.al-icon{font-size:1.1rem;flex-shrink:0;margin-top:1px;}
+.al-title{font-family:var(--font-d);font-size:.85rem;font-weight:800;margin-bottom:.15rem;}
+.al-text{font-size:.78rem;color:var(--text2);line-height:1.4;}
+.charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.5rem;}
+.ch-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:1.5rem;backdrop-filter:blur(16px);transition:all .3s var(--bounce);}
+.ch-card:hover{border-color:var(--border2);transform:translateY(-3px);}
+.ch-card.full{grid-column:1/-1;}
+.ch-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;}
+.ch-title{font-family:var(--font-d);font-size:.92rem;font-weight:800;}
+.ch-badge{padding:.2rem .65rem;border-radius:100px;font-size:.65rem;font-weight:700;}
+.bg-g{background:rgba(110,231,183,.12);color:var(--green);}.bg-o{background:rgba(251,146,60,.12);color:var(--orange);}.bg-b{background:rgba(59,130,246,.12);color:var(--blue);}
+.ch-wrap{position:relative;height:200px;}
+.recs-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;}
+.rec-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.2rem;backdrop-filter:blur(12px);transition:all .25s var(--bounce);animation:cardUp .5s both;}
+.rec-card:hover{transform:translateY(-3px);border-color:var(--border2);}
+.rec-top{display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem;}
+.rec-cat{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);}
+.rec-tag{margin-left:auto;padding:.15rem .55rem;border-radius:100px;font-size:.62rem;font-weight:700;}
+.tg{background:rgba(110,231,183,.12);color:var(--green);}.to{background:rgba(251,146,60,.12);color:var(--orange);}.tb{background:rgba(59,130,246,.12);color:var(--blue);}.tp{background:rgba(167,139,250,.12);color:var(--purple);}.tr{background:rgba(248,113,113,.12);color:var(--red);}
+.rec-title{font-family:var(--font-d);font-size:.88rem;font-weight:800;margin-bottom:.3rem;}
+.rec-text{font-size:.76rem;color:var(--text2);line-height:1.5;}
+.refresh-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:.75rem;}
+.refresh-info{font-size:.78rem;color:var(--text2);}
+.btn-refresh{padding:.55rem 1.4rem;background:var(--surface2);border:1px solid var(--border2);border-radius:100px;color:var(--green);font-family:var(--font-d);font-size:.78rem;font-weight:700;cursor:pointer;transition:all .25s var(--bounce);display:flex;align-items:center;gap:.45rem;}
+.btn-refresh:hover{transform:translateY(-2px);background:rgba(110,231,183,.1);}
+.footer{text-align:center;padding:2rem;border-top:1px solid var(--border);font-size:.8rem;color:var(--text3);}
+.footer em{font-style:normal;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes cardUp{from{opacity:0;transform:translateY(25px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes slideIn{from{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:translateX(0)}}
+@media(max-width:768px){.prediction-wrap{grid-template-columns:1fr;text-align:center;}.pred-stats{justify-content:center;}.insights-grid,.charts-grid,.recs-grid{grid-template-columns:1fr;}.ch-card.full{grid-column:1;}}
+::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-thumb{background:var(--border);border-radius:100px;}
+  </style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-left">
+    <div class="nav-logo">💪</div>
+    <span class="nav-brand">FitPlan<em>India</em></span>
+  </div>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">🏠 <span class="nl">Planner</span></a>
+    <a href="exercise.html" class="nav-link" style="color:#6EE7B7;border-color:rgba(110,231,183,.2);background:rgba(110,231,183,.06);">🏋️ <span class="nl">Exercise</span></a>
+    <a href="progress.html" class="nav-link" style="color:#FB923C;border-color:rgba(251,146,60,.2);background:rgba(251,146,60,.06);">📊 <span class="nl">Progress</span></a>
+    <a href="dashboard.html" class="nav-link" style="color:#3B82F6;border-color:rgba(59,130,246,.2);background:rgba(59,130,246,.06);font-weight:600;">📈 <span class="nl">Dashboard</span></a>
+    <a href="smart.html" class="nav-link" style="color:#A78BFA;border-color:rgba(167,139,250,.2);background:rgba(167,139,250,.06);">🧠 <span class="nl">Smart</span></a>
+    <a href="indian-diet.html" class="nav-link" style="color:#FF9933;border-color:rgba(255,153,51,.2);background:rgba(255,153,51,.06);">🥗 <span class="nl">Indian Diet</span></a>
+    <a href="language.html" class="nav-link">🌍 <span class="nl">Language</span></a>
+  </div>
+  <div class="nav-right"><button class="theme-btn" id="themeBtn">☀</button></div>
+</nav>
+<section class="hero">
+  <div class="hero-badge">📈 Real Analytics</div>
+  <h1 class="hero-title">Your Data.<br/><span class="grad-blue">Meaningful Insights.</span></h1>
+  <p class="hero-desc">Smart predictions · Weekly insights · Personalised alerts · Auto-updating recommendations</p>
+</section>
+<main class="main" id="mainContent">
+  <div class="no-profile"><div class="no-profile-icon">🔍</div><h3>No Profile Found</h3><p>Go to the Planner, enter your details and generate your plan first. Then come back here for full analytics.</p><a href="index.html" class="btn-go">→ Go to Planner</a></div>
+</main>
+<footer class="footer"><p>FitPlan<em>India</em> · Analytics Dashboard · Data-Driven Fitness 📈</p></footer>
+<script>
+/* ═══════════════════════════════════════════════════════════
+   FITPLAN INDIA — SMART ENGINE (engine.js)
+   Dynamic recommendation system, goal tracking,
+   calorie adjustment logic, prediction engine
+═══════════════════════════════════════════════════════════ */
+'use strict';
+
+const FitEngine = (() => {
+
+  const STORAGE = {
+    profile:  'fp_profile',
+    progress: 'fp_progress',
+    engine:   'fp_engine_state',
+  };
+
+  /* ── DATA LAYER ── */
+  function getProfile() { try { return JSON.parse(localStorage.getItem(STORAGE.profile)||'null'); } catch { return null; } }
+  function saveProfile(p) { localStorage.setItem(STORAGE.profile, JSON.stringify(p)); }
+  function getProgress() { try { return JSON.parse(localStorage.getItem(STORAGE.progress)||'[]'); } catch { return []; } }
+  function getEngineState() { try { return JSON.parse(localStorage.getItem(STORAGE.engine)||'{}'); } catch { return {}; } }
+  function saveEngineState(s) { localStorage.setItem(STORAGE.engine, JSON.stringify(s)); }
+
+  /* ── CORE CALCULATIONS ── */
+  function calcBMI(weight, height) {
+    return parseFloat((weight / Math.pow(height / 100, 2)).toFixed(1));
+  }
+
+  function getBMICategory(bmi) {
+    if (bmi < 16)   return { label:'Severely Underweight', color:'#3B82F6', score:1 };
+    if (bmi < 18.5) return { label:'Underweight',          color:'#60A5FA', score:2 };
+    if (bmi < 25)   return { label:'Normal Weight',        color:'#6EE7B7', score:5 };
+    if (bmi < 27.5) return { label:'Slightly Overweight',  color:'#FCD34D', score:3 };
+    if (bmi < 30)   return { label:'Overweight',           color:'#FB923C', score:2 };
+    return               { label:'Obese',                  color:'#F87171', score:1 };
+  }
+
+  function calcTDEE(weight, height, age, gender, activity) {
+    let bmr = gender === 'female'
+      ? 447.593 + (9.247*weight) + (3.098*height) - (4.330*age)
+      : 88.362  + (13.397*weight) + (4.799*height) - (5.677*age);
+    const m = {sedentary:1.2, light:1.375, moderate:1.55, active:1.725, very_active:1.9};
+    return Math.round(bmr * (m[activity||'moderate'] || 1.55));
+  }
+
+  function calcDynamicCalories(profile, progressData) {
+    let target = calcTDEE(profile.weight, profile.height, profile.age, profile.gender, profile.activity);
+    if (profile.goal === 'loss')    target -= 500;
+    if (profile.goal === 'gain')    target += 400;
+
+    const recent = progressData.slice(-14).filter(d=>d.weight);
+    if (recent.length >= 4) {
+      const change = recent[recent.length-1].weight - recent[0].weight;
+      if (profile.goal === 'loss') {
+        if (change > -0.3) target -= 100;
+        if (change < -1.5) target += 100;
+      }
+      if (profile.goal === 'gain') {
+        if (change < 0.2)  target += 100;
+        if (change > 1.2)  target -= 100;
+      }
+    }
+    return Math.max(1200, Math.min(4500, target));
+  }
+
+  function calcMacros(calories, goal) {
+    const s = {loss:{p:.35,c:.40,f:.25}, gain:{p:.30,c:.45,f:.25}, maintain:{p:.25,c:.50,f:.25}}[goal] || {p:.25,c:.50,f:.25};
+    return {
+      protein: Math.round((calories*s.p)/4),
+      carbs:   Math.round((calories*s.c)/4),
+      fat:     Math.round((calories*s.f)/9),
+    };
+  }
+
+  /* ── STREAK ── */
+  function calcStreak(data) {
+    if (!data.length) return 0;
+    const sorted = [...data].sort((a,b)=>new Date(b.date)-new Date(a.date));
+    let streak=0, check=new Date();
+    for (let i=0;i<sorted.length;i++) {
+      if (new Date(sorted[i].date).toDateString()===check.toDateString()) { streak++; check.setDate(check.getDate()-1); }
+      else break;
+    }
+    return streak;
+  }
+
+  /* ── PREDICTION ENGINE ── */
+  function predictGoal(profile, progressData) {
+    if (!profile) return null;
+    const withWeight = progressData.filter(d=>d.weight).slice(-21);
+    if (withWeight.length < 2) return null;
+
+    const days = withWeight.length;
+    const totalChange = withWeight[days-1].weight - withWeight[0].weight;
+    const ratePerDay  = totalChange / days;
+    const currentWeight = withWeight[days-1].weight;
+    const h = profile.height/100;
+
+    let goalWeight = currentWeight;
+    if (profile.goal==='loss')    goalWeight = Math.max(22*h*h, currentWeight-20);
+    else if (profile.goal==='gain') goalWeight = Math.min(25*h*h, currentWeight+15);
+    else return { daysLeft:0, goalWeight:currentWeight.toFixed(1), currentWeight, percent:100, message:'You are at your goal!' };
+
+    const remaining = Math.abs(goalWeight - currentWeight);
+    const absRate   = Math.abs(ratePerDay);
+    if (absRate < 0.001) return null;
+
+    const daysLeft = Math.round(remaining / absRate);
+    const startW   = withWeight[0].weight;
+    const total    = Math.abs(goalWeight - startW);
+    const done     = Math.abs(currentWeight - startW);
+    const percent  = Math.min(100, Math.round((done/total)*100));
+
+    return { daysLeft, goalWeight: parseFloat(goalWeight).toFixed(1), currentWeight, remaining: remaining.toFixed(1), percent, ratePerWeek: (ratePerDay*7).toFixed(2) };
+  }
+
+  /* ── WEEKLY INSIGHTS ── */
+  function getWeeklyInsights(progressData) {
+    const insights = [];
+    if (progressData.length < 2) return insights;
+
+    const sorted   = [...progressData].sort((a,b)=>new Date(a.date)-new Date(b.date));
+    const thisWeek = sorted.slice(-7);
+    const lastWeek = sorted.slice(-14,-7);
+
+    const tww = thisWeek.filter(d=>d.weight);
+    const lww = lastWeek.filter(d=>d.weight);
+    if (tww.length >= 2) {
+      const change = tww[tww.length-1].weight - tww[0].weight;
+      insights.push({
+        type: change<0?'success':change>0?'warning':'info',
+        icon: change<0?'📉':change>0?'📈':'➡️',
+        title:'Weight This Week',
+        text: change===0?'Weight stayed stable this week.':`You ${change<0?'lost':'gained'} ${Math.abs(change).toFixed(1)} kg this week.`,
+        value: (change>=0?'+':'')+change.toFixed(1)+' kg',
+      });
+    }
+
+    const twc = thisWeek.filter(d=>d.calories);
+    const lwc = lastWeek.filter(d=>d.calories);
+    if (twc.length >= 2 && lwc.length >= 2) {
+      const avgThis = twc.reduce((s,d)=>s+d.calories,0)/twc.length;
+      const avgLast = lwc.reduce((s,d)=>s+d.calories,0)/lwc.length;
+      const diff = Math.round(avgThis-avgLast);
+      insights.push({
+        type:'info', icon:'🔥', title:'Calorie Trend',
+        text:`Avg ${Math.round(avgThis)} kcal/day this week vs ${Math.round(avgLast)} last week.`,
+        value:(diff>=0?'+':'')+diff+' kcal',
+      });
+    }
+
+    const twwk = thisWeek.filter(d=>d.workouts>0);
+    insights.push({
+      type: twwk.length>=4?'success':twwk.length>=2?'info':'warning',
+      icon:'🏋️', title:'Workouts This Week',
+      text: twwk.length===0?'No workouts logged. Start today!':`${twwk.length} workout${twwk.length>1?'s':''} — ${twwk.length>=4?'Excellent!':twwk.length>=2?'Good effort!':'Aim for more!'}`,
+      value: twwk.length+' sessions',
+    });
+
+    const streak = calcStreak(sorted);
+    if (streak > 0) {
+      insights.push({
+        type: streak>=7?'success':'info', icon:'🔥', title:'Current Streak',
+        text: streak>=7?`${streak} day streak! Unstoppable!`:streak>=3?`${streak} day streak! Keep it up!`:`${streak} day streak. Build momentum!`,
+        value: streak+' days',
+      });
+    }
+    return insights;
+  }
+
+  /* ── SMART ALERTS ── */
+  function getSmartAlerts(profile, progressData) {
+    const alerts = [];
+    if (!profile) return [{ level:'info', icon:'💡', title:'Set Up Profile', text:'Go to the Planner page and generate your plan to enable smart alerts.' }];
+
+    const sorted = [...progressData].sort((a,b)=>new Date(a.date)-new Date(b.date));
+    const recent = sorted.slice(-7);
+    const todayStr = new Date().toISOString().split('T')[0];
+    const loggedToday = sorted.some(d=>d.date===todayStr);
+
+    if (!loggedToday) alerts.push({ level:'warning', icon:'⚠️', title:"Haven't Logged Today!", text:'Log your progress to keep your streak alive.' });
+
+    const recentW = recent.filter(d=>d.weight);
+    if (recentW.length >= 2) {
+      const bmi = calcBMI(recentW[recentW.length-1].weight, profile.height);
+      if (bmi > 30) alerts.push({ level:'danger',  icon:'🚨', title:'BMI Obese Range',    text:'Your BMI is above 30. Prioritise calorie deficit and daily walking.' });
+      if (bmi < 16) alerts.push({ level:'danger',  icon:'🚨', title:'BMI Critically Low', text:'Your BMI is dangerously low. Increase calorie intake immediately.' });
+      if (profile.goal==='loss') {
+        const chg = recentW[recentW.length-1].weight - recentW[0].weight;
+        if (chg > 0.5) alerts.push({ level:'warning', icon:'📈', title:'Weight Going Up', text:'Gaining despite loss goal. Review calorie intake.' });
+      }
+    }
+
+    const recentC = recent.filter(d=>d.calories);
+    if (recentC.length >= 3) {
+      const avg = recentC.reduce((s,d)=>s+d.calories,0)/recentC.length;
+      const tgt = calcDynamicCalories(profile, sorted);
+      if (avg > tgt+400) alerts.push({ level:'warning', icon:'🔥', title:'Overeating',    text:`Avg ${Math.round(avg)} kcal is ${Math.round(avg-tgt)} above target.` });
+      if (avg < tgt-500 && profile.goal!=='loss') alerts.push({ level:'info', icon:'🍽️', title:'Undereating', text:`You're ${Math.round(tgt-avg)} kcal below target. May slow muscle growth.` });
+    }
+
+    if (recent.filter(d=>d.workouts>0).length===0 && recent.length>=3) {
+      alerts.push({ level:'warning', icon:'🏋️', title:'No Workouts This Week', text:'Zero workouts logged this week. Consistency is everything!' });
+    }
+
+    if (!alerts.length) alerts.push({ level:'success', icon:'✅', title:'All Systems Go!', text:'You are on track. Keep logging and stay consistent!' });
+    return alerts;
+  }
+
+  /* ── RECOMMENDATION ENGINE ── */
+  function getRecommendations(profile, progressData) {
+    if (!profile) return [];
+    const bmi      = calcBMI(profile.weight, profile.height);
+    const calories = calcDynamicCalories(profile, progressData);
+    const macros   = calcMacros(calories, profile.goal);
+    const recent   = progressData.slice(-14).filter(d=>d.weight);
+    const recs     = [];
+
+    recs.push({ priority:1, icon:'🔥', category:'Nutrition', badge:'Dynamic', badgeColor:'green',
+      title:`Target ${calories} kcal/day`,
+      text:`Optimal daily intake: ${calories} kcal. Protein: ${macros.protein}g | Carbs: ${macros.carbs}g | Fat: ${macros.fat}g. Adjusted weekly based on your progress.` });
+
+    if (bmi < 18.5) {
+      recs.push({ priority:2, icon:'🥩', category:'Diet', badge:'Critical', badgeColor:'orange',
+        title:'High Protein Priority',
+        text:`BMI: ${bmi} (Underweight). Eat ${Math.round(profile.weight*2)}g protein daily. Dal, paneer, eggs, chicken, peanut butter are ideal.` });
+    } else if (bmi > 27) {
+      recs.push({ priority:2, icon:'🥗', category:'Diet', badge:'Important', badgeColor:'orange',
+        title:'Reduce Refined Carbs',
+        text:`BMI: ${bmi}. Replace white rice & maida with millets, oats, roti. This saves 200–300 kcal/day without feeling hungry.` });
+    } else {
+      recs.push({ priority:2, icon:'⚖️', category:'Diet', badge:'Good', badgeColor:'green',
+        title:'Maintain Balanced Macros',
+        text:`BMI: ${bmi} (Normal). Focus on meal timing — eat within an 8–10 hour window for best results.` });
+    }
+
+    const trainingRecs = {
+      gain:     { icon:'🏋️', badge:'Strength',  badgeColor:'blue',   title:'Progressive Overload Protocol', text:'Add 2.5kg every session once you hit top of rep range. Track all lifts. Compound movements: Bench, Squat, Deadlift, Pull-ups.' },
+      loss:     { icon:'🏃', badge:'Fat Loss',   badgeColor:'red',    title:'HIIT + Strength Combo',         text:'3 days strength + 2 days HIIT. Strength training burns fat for 24–48 hours post-workout — more effective than cardio alone.' },
+      maintain: { icon:'🔄', badge:'Balance',    badgeColor:'purple', title:'Maintenance Circuit',           text:'2 upper + 2 lower + 1 full body per week. Add 10 min daily walk — burns 50–80 kcal without taxing recovery.' },
+    };
+    recs.push({ priority:3, category:'Training', ...trainingRecs[profile.goal||'maintain'] });
+
+    if (recent.length >= 5) {
+      const change = recent[recent.length-1].weight - recent[0].weight;
+      const weeklyRate = change / (recent.length/7);
+      if (profile.goal==='loss' && weeklyRate > -0.2) {
+        recs.push({ priority:4, icon:'📉', category:'Adjustment', badge:'Auto-Adjust', badgeColor:'orange', title:'Plateau Detected — Break It!', text:'Loss stalled. Cut carbs by 50g for 1 week + add 20 min walk daily + change workout routine to shock muscles.' });
+      } else if (profile.goal==='gain' && weeklyRate < 0.1) {
+        recs.push({ priority:4, icon:'📈', category:'Adjustment', badge:'Auto-Adjust', badgeColor:'orange', title:'Bulk Stalled — Eat More!', text:`Gaining only ${weeklyRate.toFixed(2)}kg/week. Add peanut butter + banana + milk shake = +400 kcal easily.` });
+      } else {
+        recs.push({ priority:4, icon:'✅', category:'Progress', badge:'Optimal', badgeColor:'green', title:'On Track — Stay the Course!', text:`Making ${Math.abs(weeklyRate).toFixed(2)}kg/week progress. Perfect rate! Do NOT change anything — consistency compounds.` });
+      }
+    }
+
+    recs.push({ priority:5, icon:'💧', category:'Recovery', badge:'Daily', badgeColor:'blue',
+      title:`Drink ${(profile.weight*0.035).toFixed(1)}L Water Daily`,
+      text:`For your weight (${profile.weight}kg): ${(profile.weight*0.035).toFixed(1)} litres/day. Dehydration kills performance and fakes hunger.` });
+
+    recs.push({ priority:6, icon:'😴', category:'Recovery', badge:'Critical', badgeColor:'purple',
+      title:'Sleep Before 11 PM',
+      text:'Growth hormone peaks 10 PM–2 AM. Cortisol rises after midnight and breaks down muscle. 7–9 hours sleep is non-negotiable.' });
+
+    return recs.sort((a,b)=>a.priority-b.priority);
+  }
+
+  /* ── AUTO-REFRESH ── */
+  function shouldAutoRefresh() {
+    const state = getEngineState();
+    if (!state.lastRefresh) return true;
+    return (new Date() - new Date(state.lastRefresh)) >= 7*24*60*60*1000;
+  }
+
+  function markRefreshed() {
+    const s = getEngineState();
+    s.lastRefresh = new Date().toISOString();
+    saveEngineState(s);
+  }
+
+  /* ── MAIN ENTRY POINT ── */
+  function analyse(forceRefresh=false) {
+    const profile  = getProfile();
+    const progress = getProgress();
+    if (!profile) return null;
+
+    if (forceRefresh || shouldAutoRefresh()) markRefreshed();
+
+    return {
+      profile,
+      bmi:        calcBMI(profile.weight, profile.height),
+      bmiCat:     getBMICategory(calcBMI(profile.weight, profile.height)),
+      calories:   calcDynamicCalories(profile, progress),
+      macros:     calcMacros(calcDynamicCalories(profile, progress), profile.goal),
+      recs:       getRecommendations(profile, progress),
+      insights:   getWeeklyInsights(progress),
+      alerts:     getSmartAlerts(profile, progress),
+      prediction: predictGoal(profile, progress),
+      streak:     calcStreak(progress),
+      timestamp:  new Date().toISOString(),
+    };
+  }
+
+  return { analyse, calcBMI, getBMICategory, calcTDEE, calcDynamicCalories, calcMacros,
+    predictGoal, getWeeklyInsights, getSmartAlerts, getRecommendations, calcStreak,
+    shouldAutoRefresh, getProfile, saveProfile, getProgress, STORAGE };
+})();
+
+window.FitEngine = FitEngine;
+
+</script>
+<script>
+let charts=[];
+const isDark=()=>document.documentElement.getAttribute('data-theme')==='dark';
+const gc=()=>isDark()?'rgba(255,255,255,0.06)':'rgba(0,0,0,0.06)';
+const tc=()=>isDark()?'#7A8FA8':'#4B5563';
+function destroyCharts(){charts.forEach(c=>c.destroy());charts=[];}
+function cOpts(){return{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:isDark()?'rgba(12,18,32,.95)':'rgba(255,255,255,.97)',titleColor:isDark()?'#F0F6FF':'#111827',bodyColor:isDark()?'#7A8FA8':'#4B5563',borderColor:isDark()?'rgba(255,255,255,.12)':'rgba(0,0,0,.08)',borderWidth:1,cornerRadius:10,padding:10}},scales:{x:{grid:{color:gc()},ticks:{color:tc(),font:{family:'DM Sans',size:10}}},y:{grid:{color:gc()},ticks:{color:tc(),font:{family:'DM Sans',size:10}}}}};}
+
+function renderDashboard(force){
+  destroyCharts();
+  const result=FitEngine.analyse(force||false);
+  if(!result){
+    document.getElementById('mainContent').innerHTML='<div class="no-profile"><div class="no-profile-icon">🔍</div><h3>No Profile Found</h3><p>Go to the Planner, enter your details and generate your plan first.</p><a href="index.html" class="btn-go">Go to Planner</a></div>';
+    return;
+  }
+  const {profile,bmi,bmiCat,calories,macros,recs,insights,alerts,prediction,streak}=result;
+  const progress=FitEngine.getProgress().sort((a,b)=>new Date(a.date)-new Date(b.date));
+  const goalLabel={loss:'Weight Loss',gain:'Muscle Gain',maintain:'Maintain Weight'}[profile.goal]||'Your Goal';
+  const pct=prediction?prediction.percent:0;
+  const circum=2*Math.PI*60;
+  const offset=circum-(pct/100)*circum;
+  const daysMsg=prediction?(prediction.daysLeft===0?'Goal Reached! 🎉':`~${prediction.daysLeft} days to goal`):'Log more data for prediction';
+  const tagMap={green:'tg',orange:'to',blue:'tb',purple:'tp',red:'tr'};
+  const insHTML=insights.length?insights.map(i=>`<div class="ins-card ${i.type}"><div class="ins-icon">${i.icon}</div><div style="flex:1"><div class="ins-title">${i.title}</div><div class="ins-text">${i.text}</div></div><div class="ins-val ${i.type==='success'?'g':i.type==='warning'?'o':'b'}">${i.value||''}</div></div>`).join(''):'<div class="ins-card info"><div class="ins-icon">📊</div><div><div class="ins-title">Log More Data</div><div class="ins-text">Log at least 7 days of progress to unlock weekly insights.</div></div></div>';
+  const alHTML=alerts.map(a=>`<div class="al-card ${a.level}"><div class="al-icon">${a.icon}</div><div><div class="al-title">${a.title}</div><div class="al-text">${a.text}</div></div></div>`).join('');
+  const recHTML=recs.slice(0,6).map(r=>`<div class="rec-card"><div class="rec-top"><span style="font-size:1.1rem">${r.icon}</span><span class="rec-cat">${r.category}</span><span class="rec-tag ${tagMap[r.badgeColor]||'tb'}">${r.badge}</span></div><div class="rec-title">${r.title}</div><div class="rec-text">${r.text}</div></div>`).join('');
+  document.getElementById('mainContent').innerHTML=`
+<div class="refresh-bar"><span class="refresh-info">🧠 Smart Engine · Auto-updates weekly · Personalised to your progress</span><button class="btn-refresh" onclick="renderDashboard(true)">↻ Refresh Now</button></div>
+<div class="sec-label">🎯 Goal Prediction</div>
+<div class="prediction-wrap">
+  <div class="ring-wrap">
+    <svg viewBox="0 0 140 140"><defs><linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#6EE7B7"/><stop offset="100%" stop-color="#3B82F6"/></linearGradient></defs>
+    <circle class="ring-bg-c" cx="70" cy="70" r="60"/><circle class="ring-prog" cx="70" cy="70" r="60" stroke-dasharray="${circum.toFixed(1)}" stroke-dashoffset="${offset.toFixed(1)}"/></svg>
+    <div class="ring-center"><div class="ring-pct">${pct}%</div><div class="ring-lbl">Complete</div></div>
+  </div>
+  <div class="pred-info">
+    <h3>${goalLabel} Journey</h3>
+    <p>${daysMsg}${prediction?` · Target: <strong>${prediction.goalWeight}kg</strong> · Current: <strong>${prediction.currentWeight}kg</strong>`:''}</p>
+    <div class="pred-stats">
+      <div><div class="p-stat-val" style="color:var(--green)">${bmi}</div><div class="p-stat-lbl">BMI</div></div>
+      <div><div class="p-stat-val" style="color:var(--orange)">${calories}</div><div class="p-stat-lbl">kcal/day</div></div>
+      <div><div class="p-stat-val" style="color:var(--blue)">${streak}🔥</div><div class="p-stat-lbl">Day Streak</div></div>
+      ${prediction?`<div><div class="p-stat-val" style="color:var(--purple)">${prediction.ratePerWeek}kg</div><div class="p-stat-lbl">/week</div></div>`:''}
+    </div>
+  </div>
+</div>
+<div class="sec-label">📊 Weekly Insights</div>
+<div class="insights-grid">${insHTML}</div>
+<div class="sec-label">🚨 Smart Alerts</div>
+<div class="alerts-list">${alHTML}</div>
+<div class="sec-label">📈 Progress Charts</div>
+<div class="charts-grid">
+  <div class="ch-card"><div class="ch-top"><span class="ch-title">⚖️ Weight Trend</span><span class="ch-badge bg-g">kg</span></div><div class="ch-wrap"><canvas id="wC"></canvas></div></div>
+  <div class="ch-card"><div class="ch-top"><span class="ch-title">🔥 Calorie Intake</span><span class="ch-badge bg-o">kcal</span></div><div class="ch-wrap"><canvas id="cC"></canvas></div></div>
+  <div class="ch-card full"><div class="ch-top"><span class="ch-title">🏋️ Workouts</span><span class="ch-badge bg-b">sessions</span></div><div class="ch-wrap"><canvas id="wkC"></canvas></div></div>
+</div>
+<div class="sec-label">🧠 Smart Recommendations</div>
+<div class="recs-grid">${recHTML}</div>`;
+
+  if(progress.length>0){
+    const labels=progress.map(d=>new Date(d.date).toLocaleDateString('en-IN',{day:'2-digit',month:'short'}));
+    const o=cOpts();
+    charts.push(new Chart(document.getElementById('wC'),{type:'line',data:{labels,datasets:[{data:progress.map(d=>d.weight||null),borderColor:'#6EE7B7',backgroundColor:'rgba(110,231,183,0.08)',tension:.4,fill:true,pointBackgroundColor:'#6EE7B7',pointRadius:4,spanGaps:true}]},options:{...o}}));
+    charts.push(new Chart(document.getElementById('cC'),{type:'bar',data:{labels,datasets:[{data:progress.map(d=>d.calories||null),backgroundColor:'rgba(251,146,60,0.7)',borderColor:'#FB923C',borderRadius:8}]},options:{...o}}));
+    charts.push(new Chart(document.getElementById('wkC'),{type:'bar',data:{labels,datasets:[{data:progress.map(d=>d.workouts||0),backgroundColor:'rgba(59,130,246,0.7)',borderColor:'#3B82F6',borderRadius:8}]},options:{...o}}));
+  }
+}
+const themeBtn=document.getElementById('themeBtn');
+function applyTheme(t){document.documentElement.setAttribute('data-theme',t);themeBtn.textContent=t==='dark'?'☀':'☽';localStorage.setItem('fpTheme',t);renderDashboard();}
+themeBtn.addEventListener('click',()=>applyTheme(isDark()?'light':'dark'));
+applyTheme(localStorage.getItem('fpTheme')||'dark');
+</script>
+</body>
+</html>

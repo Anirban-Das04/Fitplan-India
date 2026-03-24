@@ -310,10 +310,10 @@
     <div class="about-modal">
       <button class="about-close" onclick="closeAboutBtn()">✕</button>
       <div class="about-logo">💪</div>
-      <div class="about-title">FitPlan India</div>
+      <div class="about-title">FitPlan </div>
       <div class="about-tagline">Smart Fitness &amp; Diet Planner — Personalised for You</div>
       <p class="about-body">
-        FitPlan India is a browser-based fitness companion that analyses your body metrics and generates a
+        FitPlan AI is a browser-based fitness companion that analyses your body metrics and generates a
         fully personalised 7-day diet plan and weekly workout schedule — instantly, with zero sign-up required.
         Whether you're on a budget or eating premium, vegetarian or non-veg, we've got you covered.
       </p>
@@ -326,7 +326,7 @@
         <div class="about-feat"><span class="about-feat-icon">⬇️</span> Downloadable Plan</div>
       </div>
       <div class="about-divider"></div>
-      <div class="about-credit">Built with ♥ by <span>FitPlan India</span> · No data stored · 100% private</div>
+      <div class="about-credit">Built with ♥ by <span>FitPlan </span> · No data stored · 100% private</div>
     </div>
   </div>
 
@@ -350,16 +350,18 @@
             </defs>
           </svg>
         </div>
-        <span class="nav-name">FitPlan<em>India</em></span>
+        <span class="nav-name">FitPlan<em>AI</em></span>
       </div>
 
       <div class="nav-actions">
         <nav class="nav-links">
-          <a href="index.html" class="nav-link active">🏠 <span class="nav-label">Planner</span></a>
+          <a href="index.html" class="nav-link active" style="color:var(--text);background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.12);">🏠 <span class="nav-label">Planner</span></a>
           <a href="exercise.html" class="nav-link exercise-link">🏋️ <span class="nav-label">Exercise</span></a>
-          <a href="progress.html" class="nav-link" style="background:linear-gradient(135deg,rgba(251,146,60,.1),rgba(248,113,113,.07));border-color:rgba(251,146,60,.2);color:#FB923C;">📊 <span class="nav-label">Progress</span></a>
-          <a href="smart.html" class="nav-link" style="background:linear-gradient(135deg,rgba(167,139,250,.1),rgba(59,130,246,.07));border-color:rgba(167,139,250,.2);color:#A78BFA;">🧠 <span class="nav-label">Smart</span></a>
-          <a href="language.html" class="nav-link" style="background:linear-gradient(135deg,rgba(110,231,183,.08),rgba(59,130,246,.05));border-color:rgba(110,231,183,.15);color:#6EE7B7;">🌍 <span class="nav-label">Language</span></a>
+          <a href="progress.html" class="nav-link" style="color:#FB923C;border-color:rgba(251,146,60,.2);background:rgba(251,146,60,.06);">📊 <span class="nav-label">Progress</span></a>
+          <a href="dashboard.html" class="nav-link" style="color:#3B82F6;border-color:rgba(59,130,246,.2);background:rgba(59,130,246,.06);">📈 <span class="nav-label">Dashboard</span></a>
+          <a href="smart.html" class="nav-link" style="color:#A78BFA;border-color:rgba(167,139,250,.2);background:rgba(167,139,250,.06);">🧠 <span class="nav-label">Smart</span></a>
+          <a href="indian-diet.html" class="nav-link" style="color:#FF9933;border-color:rgba(255,153,51,.2);background:rgba(255,153,51,.06);">🥗 <span class="nav-label">Indian Diet</span></a>
+          <a href="language.html" class="nav-link">🌍 <span class="nav-label">Language</span></a>
           <button class="nav-link about-link" onclick="openAbout()">✦ <span class="nav-label">About</span></button>
         </nav>
         <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
@@ -611,11 +613,12 @@
     </section>
 
     <footer class="footer">
-      <p>FitPlan<em>India</em> · Smart Fitness &amp; Diet Planner · Built with ♥</p>
+      <p>FitPlan<em>AI</em> · Smart Fitness &amp; Diet Planner · Built with ♥</p>
     </footer>
 
   </div><!-- /app -->
 
+  <script src="engine.js"></script>
   <script src="script2.js"></script>
   <script>
     function openAbout() {

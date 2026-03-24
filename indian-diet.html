@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Indian Diet Optimizer — FitPlan India</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--green:#6EE7B7;--blue:#3B82F6;--purple:#A78BFA;--orange:#FB923C;--red:#F87171;--yellow:#FCD34D;--saffron:#FF9933;--white:#FFFFFF;--india-green:#138808;--grad:linear-gradient(135deg,#6EE7B7,#3B82F6);--grad-india:linear-gradient(135deg,#FF9933,#FFFFFF,#138808);--grad-warm:linear-gradient(135deg,#FB923C,#F87171);--font-d:'Syne',sans-serif;--font-b:'DM Sans',sans-serif;--bounce:cubic-bezier(0.34,1.56,0.64,1);--ease:cubic-bezier(0.4,0,0.2,1);}
+[data-theme="dark"]{--bg:#070b12;--surface:rgba(255,255,255,0.04);--surface2:rgba(255,255,255,0.07);--border:rgba(255,255,255,0.08);--border2:rgba(255,153,51,0.35);--text:#F0F6FF;--text2:#7A8FA8;--text3:#3A4A60;--nav:rgba(7,11,18,0.55);}
+[data-theme="light"]{--bg:#FFF8F0;--surface:rgba(255,255,255,0.65);--surface2:rgba(255,255,255,0.9);--border:rgba(0,0,0,0.07);--border2:rgba(255,153,51,0.3);--text:#111827;--text2:#4B5563;--text3:#9CA3AF;--nav:rgba(255,248,240,0.6);}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-b);background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;transition:background .4s,color .4s;padding-top:88px;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 20% 10%,rgba(255,153,51,0.06) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 80% 80%,rgba(19,136,8,0.05) 0%,transparent 60%);pointer-events:none;z-index:0;}
+body>*{position:relative;z-index:1;}
+.nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);width:calc(100% - 48px);max-width:1100px;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.5rem;background:var(--nav);backdrop-filter:blur(28px);border:1px solid rgba(255,255,255,0.1);border-radius:100px;box-shadow:0 8px 40px rgba(0,0,0,0.4);}
+[data-theme="light"] .nav{border-color:rgba(255,153,51,0.15);}
+.nav-left{display:flex;align-items:center;gap:.75rem;}
+.nav-logo{width:34px;height:34px;background:var(--grad);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+.nav-brand{font-family:var(--font-d);font-weight:800;font-size:1.1rem;color:var(--text);}
+.nav-brand em{font-style:normal;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.nav-links{display:flex;align-items:center;gap:.2rem;}
+.nav-link{display:flex;align-items:center;gap:.35rem;padding:.4rem .85rem;border-radius:100px;font-size:.78rem;font-weight:500;color:var(--text2);text-decoration:none;border:1px solid transparent;cursor:pointer;transition:all .25s;font-family:var(--font-b);white-space:nowrap;background:none;}
+.nav-link:hover{color:var(--text);background:rgba(255,255,255,0.07);border-color:rgba(255,255,255,0.1);}
+.active-indian{background:linear-gradient(135deg,rgba(255,153,51,.15),rgba(19,136,8,.08))!important;border-color:rgba(255,153,51,.4)!important;color:var(--saffron)!important;}
+.theme-btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);cursor:pointer;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--text2);}
+.nav-right{display:flex;align-items:center;gap:.5rem;}
+@media(max-width:800px){.nav{border-radius:20px;width:calc(100% - 20px);top:10px;padding:.6rem .9rem;}.nav-link .nl{display:none;}.nav-link{padding:.4rem .55rem;}}
+.hero{padding:2.5rem 1.5rem 1.5rem;text-align:center;}
+.india-flag-strip{display:flex;height:5px;border-radius:100px;overflow:hidden;max-width:200px;margin:0 auto 1.25rem;animation:fadeUp .7s both;}
+.fs1{flex:1;background:#FF9933;}.fs2{flex:1;background:#fff;}.fs3{flex:1;background:#138808;}
+.hero-badge{display:inline-block;padding:.3rem .9rem;border:1px solid rgba(255,153,51,.4);border-radius:100px;font-size:.75rem;color:var(--saffron);background:rgba(255,153,51,.08);margin-bottom:1rem;animation:fadeUp .7s both .1s;}
+.hero-title{font-family:var(--font-d);font-size:clamp(1.8rem,5vw,3rem);font-weight:800;letter-spacing:-.03em;margin-bottom:.5rem;animation:fadeUp .7s both .2s;}
+.grad-india{background:linear-gradient(135deg,#FF9933,#FB923C);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-desc{color:var(--text2);font-size:.9rem;max-width:520px;margin:0 auto;animation:fadeUp .7s both .3s;}
+.main{max-width:1100px;margin:0 auto;padding:1.5rem 1.5rem 4rem;}
+.sec-label{font-family:var(--font-d);font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text2);margin-bottom:.9rem;display:flex;align-items:center;gap:.6rem;}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border);}
+/* FILTER ROW */
+.filter-row{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:2rem;animation:fadeUp .6s both .2s;}
+.filter-group{display:flex;flex-direction:column;gap:.4rem;}
+.filter-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);}
+.chip-group{display:flex;gap:.4rem;flex-wrap:wrap;}
+.chip{padding:.45rem 1rem;background:var(--surface2);border:1px solid var(--border);border-radius:100px;font-size:.8rem;font-weight:500;cursor:pointer;transition:all .25s var(--bounce);color:var(--text2);}
+.chip:hover{transform:translateY(-2px);}
+.chip.active-goal{background:rgba(110,231,183,.12);border-color:rgba(110,231,183,.35);color:var(--green);}
+.chip.active-region{background:rgba(255,153,51,.12);border-color:rgba(255,153,51,.35);color:var(--saffron);}
+.chip.active-diet{background:rgba(19,136,8,.15);border-color:rgba(19,136,8,.4);color:#4ADE80;}
+.chip.active-budget{background:rgba(167,139,250,.12);border-color:rgba(167,139,250,.35);color:var(--purple);}
+/* MACRO SUMMARY */
+.macro-bar{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:1.5rem;display:flex;gap:2rem;align-items:center;margin-bottom:1.5rem;backdrop-filter:blur(16px);flex-wrap:wrap;animation:fadeUp .6s both .3s;}
+.macro-item{text-align:center;}
+.macro-val{font-family:var(--font-d);font-size:1.6rem;font-weight:800;line-height:1;}
+.macro-lbl{font-size:.65rem;color:var(--text2);margin-top:2px;}
+.macro-item.cal .macro-val{color:var(--orange);}
+.macro-item.pro .macro-val{color:var(--green);}
+.macro-item.car .macro-val{color:var(--blue);}
+.macro-item.fat .macro-val{color:var(--purple);}
+.macro-note{flex:1;font-size:.82rem;color:var(--text2);line-height:1.6;}
+/* MEAL PLAN */
+.meal-plan-grid{display:grid;grid-template-columns:1fr;gap:1rem;margin-bottom:2rem;}
+.meal-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;overflow:hidden;backdrop-filter:blur(14px);transition:all .25s var(--bounce);animation:cardUp .5s both;}
+.meal-card:hover{border-color:var(--border2);transform:translateX(4px);}
+.meal-header{display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;border-bottom:1px solid var(--border);}
+.meal-time-badge{padding:.3rem .8rem;border-radius:100px;font-size:.7rem;font-weight:700;font-family:var(--font-d);}
+.badge-morning{background:rgba(252,211,77,.15);color:var(--yellow);}
+.badge-lunch{background:rgba(255,153,51,.15);color:var(--saffron);}
+.badge-snack{background:rgba(110,231,183,.12);color:var(--green);}
+.badge-dinner{background:rgba(59,130,246,.12);color:var(--blue);}
+.meal-name{font-family:var(--font-d);font-size:.95rem;font-weight:800;}
+.meal-cal-badge{margin-left:auto;font-size:.75rem;font-weight:700;color:var(--orange);background:rgba(251,146,60,.1);border:1px solid rgba(251,146,60,.2);padding:.2rem .65rem;border-radius:100px;}
+.meal-body{padding:1rem 1.25rem;display:grid;grid-template-columns:1fr auto;gap:.75rem;align-items:start;}
+.meal-items{display:flex;flex-direction:column;gap:.4rem;}
+.meal-item{display:flex;align-items:center;gap:.5rem;font-size:.85rem;}
+.meal-item-icon{font-size:1rem;width:24px;text-align:center;flex-shrink:0;}
+.meal-item-name{flex:1;}
+.meal-item-qty{font-size:.72rem;color:var(--text2);font-weight:500;white-space:nowrap;}
+.meal-macros{display:flex;flex-direction:column;gap:.2rem;text-align:right;font-size:.72rem;color:var(--text3);}
+/* FOOD DB */
+.food-db-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem;}
+.food-item-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1rem;backdrop-filter:blur(10px);transition:all .25s var(--bounce);animation:cardUp .4s both;}
+.food-item-card:hover{transform:translateY(-3px);border-color:var(--border2);}
+.fi-top{display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem;}
+.fi-icon{font-size:1.4rem;}
+.fi-name{font-family:var(--font-d);font-size:.85rem;font-weight:800;}
+.fi-cat{font-size:.62rem;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;}
+.fi-macros{display:flex;gap:.5rem;flex-wrap:wrap;}
+.fi-macro{padding:.15rem .5rem;border-radius:100px;font-size:.62rem;font-weight:700;}
+.fi-cal{background:rgba(251,146,60,.12);color:var(--orange);}
+.fi-pro{background:rgba(110,231,183,.12);color:var(--green);}
+.fi-car{background:rgba(59,130,246,.1);color:var(--blue);}
+/* TIPS */
+.tips-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem;}
+.tip-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.2rem;backdrop-filter:blur(12px);display:flex;gap:.75rem;align-items:flex-start;transition:all .25s var(--bounce);}
+.tip-card:hover{transform:translateY(-3px);border-color:var(--border2);}
+.tip-icon-wrap{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;background:rgba(255,153,51,.1);border:1px solid rgba(255,153,51,.2);}
+.tip-title{font-family:var(--font-d);font-size:.88rem;font-weight:800;margin-bottom:.25rem;}
+.tip-text{font-size:.78rem;color:var(--text2);line-height:1.5;}
+.footer{text-align:center;padding:2rem;border-top:1px solid var(--border);font-size:.8rem;color:var(--text3);}
+.footer em{font-style:normal;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes cardUp{from{opacity:0;transform:translateY(25px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(max-width:768px){.food-db-grid{grid-template-columns:1fr 1fr;}.tips-grid{grid-template-columns:1fr;}.macro-bar{gap:1rem;}}
+@media(max-width:480px){.food-db-grid{grid-template-columns:1fr;}.filter-row{flex-direction:column;}}
+::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-thumb{background:var(--border);border-radius:100px;}
+::selection{background:rgba(255,153,51,.25);}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-left">
+    <div class="nav-logo">💪</div>
+    <span class="nav-brand">FitPlan<em>India</em></span>
+  </div>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">🏠 <span class="nl">Planner</span></a>
+    <a href="exercise.html" class="nav-link" style="color:#6EE7B7;border-color:rgba(110,231,183,.2);background:rgba(110,231,183,.06);">🏋️ <span class="nl">Exercise</span></a>
+    <a href="progress.html" class="nav-link" style="color:#FB923C;border-color:rgba(251,146,60,.2);background:rgba(251,146,60,.06);">📊 <span class="nl">Progress</span></a>
+    <a href="dashboard.html" class="nav-link" style="color:#3B82F6;border-color:rgba(59,130,246,.2);background:rgba(59,130,246,.06);">📈 <span class="nl">Dashboard</span></a>
+    <a href="smart.html" class="nav-link" style="color:#A78BFA;border-color:rgba(167,139,250,.2);background:rgba(167,139,250,.06);">🧠 <span class="nl">Smart</span></a>
+    <a href="indian-diet.html" class="nav-link" style="color:#FF9933;border-color:rgba(255,153,51,.2);background:rgba(255,153,51,.06);font-weight:600;">🥗 <span class="nl">Indian Diet</span></a>
+    <a href="language.html" class="nav-link">🌍 <span class="nl">Language</span></a>
+  </div>
+  <div class="nav-right"><button class="theme-btn" id="themeBtn">☀</button></div>
+</nav>
+
+<section class="hero">
+  <div class="india-flag-strip"><div class="fs1"></div><div class="fs2"></div><div class="fs3"></div></div>
+  <div class="hero-badge">🇮🇳 Made for India</div>
+  <h1 class="hero-title">Eat Indian.<br/><span class="grad-india">Stay Fit.</span></h1>
+  <p class="hero-desc">Optimised meal plans using dal, roti, rice, paneer, curd — real Indian food for real Indian fitness goals.</p>
+</section>
+
+<main class="main">
+  <!-- FILTERS -->
+  <div class="filter-row">
+    <div class="filter-group">
+      <div class="filter-label">🎯 Goal</div>
+      <div class="chip-group" id="goalChips">
+        <div class="chip active-goal" data-group="goal" data-val="loss" onclick="setFilter('goal','loss')">📉 Weight Loss</div>
+        <div class="chip" data-group="goal" data-val="gain" onclick="setFilter('goal','gain')">📈 Muscle Gain</div>
+        <div class="chip" data-group="goal" data-val="maintain" onclick="setFilter('goal','maintain')">⚖️ Maintain</div>
+      </div>
+    </div>
+    <div class="filter-group">
+      <div class="filter-label">🗺️ Region</div>
+      <div class="chip-group" id="regionChips">
+        <div class="chip active-region" data-group="region" data-val="north" onclick="setFilter('region','north')">🌾 North</div>
+        <div class="chip" data-group="region" data-val="south" onclick="setFilter('region','south')">🍚 South</div>
+        <div class="chip" data-group="region" data-val="east" onclick="setFilter('region','east')">🐟 East</div>
+        <div class="chip" data-group="region" data-val="west" onclick="setFilter('region','west')">🌶️ West</div>
+      </div>
+    </div>
+    <div class="filter-group">
+      <div class="filter-label">🥦 Diet Type</div>
+      <div class="chip-group" id="dietChips">
+        <div class="chip active-diet" data-group="diet" data-val="veg" onclick="setFilter('diet','veg')">🥦 Vegetarian</div>
+        <div class="chip" data-group="diet" data-val="nonveg" onclick="setFilter('diet','nonveg')">🍗 Non-Veg</div>
+      </div>
+    </div>
+    <div class="filter-group">
+      <div class="filter-label">💰 Budget</div>
+      <div class="chip-group" id="budgetChips">
+        <div class="chip" data-group="budget" data-val="low" onclick="setFilter('budget','low')">💸 Low</div>
+        <div class="chip active-budget" data-group="budget" data-val="medium" onclick="setFilter('budget','medium')">💰 Medium</div>
+        <div class="chip" data-group="budget" data-val="high" onclick="setFilter('budget','high')">💎 High</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MACRO SUMMARY -->
+  <div class="sec-label">🔥 Daily Targets</div>
+  <div class="macro-bar" id="macroBar">
+    <div class="macro-item cal"><div class="macro-val" id="mCal">—</div><div class="macro-lbl">Calories</div></div>
+    <div class="macro-item pro"><div class="macro-val" id="mPro">—</div><div class="macro-lbl">Protein (g)</div></div>
+    <div class="macro-item car"><div class="macro-val" id="mCar">—</div><div class="macro-lbl">Carbs (g)</div></div>
+    <div class="macro-item fat"><div class="macro-val" id="mFat">—</div><div class="macro-lbl">Fat (g)</div></div>
+    <div class="macro-note" id="macroNote">Select your goal, region, and preferences above to see your personalised Indian diet plan.</div>
+  </div>
+
+  <!-- MEAL PLAN -->
+  <div class="sec-label">🍽️ Today's Indian Meal Plan</div>
+  <div class="meal-plan-grid" id="mealPlan"></div>
+
+  <!-- FOOD DATABASE -->
+  <div class="sec-label">📚 Indian Superfoods Database</div>
+  <div class="food-db-grid" id="foodDb"></div>
+
+  <!-- TIPS -->
+  <div class="sec-label">💡 Indian Nutrition Tips</div>
+  <div class="tips-grid">
+    <div class="tip-card"><div class="tip-icon-wrap">🫙</div><div><div class="tip-title">Dal is Your Best Friend</div><div class="tip-text">1 cup cooked dal = 18g protein, 230 kcal. Masoor, moong, toor — rotate daily for complete amino acids. Best post-workout food.</div></div></div>
+    <div class="tip-card"><div class="tip-icon-wrap">🫓</div><div><div class="tip-title">Roti vs Rice — Know When</div><div class="tip-text">Roti (whole wheat) has more fibre and protein than rice. Eat roti at dinner. Rice before/after workouts for fast energy.</div></div></div>
+    <div class="tip-card"><div class="tip-icon-wrap">🥛</div><div><div class="tip-title">Curd Every Day</div><div class="tip-text">1 cup curd = 11g protein + probiotics + calcium. Eat post-meal for digestion. Homemade curd is 3x better than packaged.</div></div></div>
+    <div class="tip-card"><div class="tip-icon-wrap">🌿</div><div><div class="tip-title">Haldi + Jeera + Methi</div><div class="tip-text">Haldi reduces inflammation (anti-cortisol). Jeera boosts digestion. Methi controls blood sugar. Add to every meal.</div></div></div>
+    <div class="tip-card"><div class="tip-icon-wrap">🥜</div><div><div class="tip-title">Peanuts — Budget Protein</div><div class="tip-text">₹30 peanut butter = 25g protein. Best affordable protein source for Indian fitness goals. 2 tbsp = 200 kcal + 8g protein.</div></div></div>
+    <div class="tip-card"><div class="tip-icon-wrap">⏰</div><div><div class="tip-title">Eat on Indian Time</div><div class="tip-text">Breakfast: 7–9 AM · Lunch: 12–1 PM (biggest meal) · Dinner: 7–8 PM. Avoid eating after 9 PM — fat storage increases 40%.</div></div></div>
+  </div>
+</main>
+
+<footer class="footer"><p>FitPlan<em>India</em> · Indian Diet Optimizer · Powered by Desi Nutrition 🇮🇳</p></footer>
+
+<script>
+/* ── MEAL DATABASE ── */
+const MEALS = {
+  north:{
+    veg:{
+      loss:{
+        morning:{name:'Light North Indian Breakfast',cal:320,items:[{icon:'🫓',name:'Multigrain Roti',qty:'2 rotis'},{icon:'🧅',name:'Onion Tomato Sabzi',qty:'1 cup'},{icon:'🥛',name:'Chaas (Buttermilk)',qty:'1 glass'}],p:12,c:48,f:6},
+        lunch:{name:'Dal Chawal with Salad',cal:480,items:[{icon:'🫘',name:'Masoor Dal',qty:'1 cup'},{icon:'🍚',name:'Brown Rice',qty:'1 cup'},{icon:'🥗',name:'Kachumber Salad',qty:'1 bowl'},{icon:'🌿',name:'Green Chutney',qty:'2 tbsp'}],p:18,c:72,f:8},
+        snack:{name:'Evening Snack',cal:180,items:[{icon:'🫙',name:'Low Fat Dahi',qty:'1 cup'},{icon:'🫙',name:'Roasted Chana',qty:'30g'}],p:14,c:20,f:3},
+        dinner:{name:'Light Dal Roti',cal:380,items:[{icon:'🫘',name:'Moong Dal',qty:'1 cup'},{icon:'🫓',name:'Whole Wheat Roti',qty:'2'},{icon:'🥬',name:'Palak Sabzi',qty:'1 cup'}],p:16,c:54,f:7}
+      },
+      gain:{
+        morning:{name:'High Calorie North Breakfast',cal:620,items:[{icon:'🥛',name:'Full Fat Milk',qty:'2 glasses'},{icon:'🫓',name:'Paratha',qty:'3 with ghee'},{icon:'🧈',name:'Homemade Butter',qty:'1 tbsp'},{icon:'🫙',name:'Curd',qty:'1 cup'}],p:24,c:82,f:18},
+        lunch:{name:'Protein Packed Dal Roti',cal:750,items:[{icon:'🫘',name:'Rajma (Kidney Beans)',qty:'1.5 cups'},{icon:'🍚',name:'White Rice',qty:'1.5 cups'},{icon:'🧀',name:'Paneer Sabzi',qty:'1 cup'},{icon:'🫓',name:'Roti',qty:'2'}],p:38,c:102,f:16},
+        snack:{name:'Mass Gain Snack',cal:400,items:[{icon:'🥜',name:'Peanut Butter',qty:'2 tbsp'},{icon:'🍌',name:'Banana',qty:'2'},{icon:'🥛',name:'Full Fat Milk',qty:'1 glass'}],p:20,c:58,f:14},
+        dinner:{name:'Paneer Power Dinner',cal:680,items:[{icon:'🧀',name:'Paneer Butter Masala',qty:'200g paneer'},{icon:'🫓',name:'Roti',qty:'4'},{icon:'🥛',name:'Lassi',qty:'1 glass'}],p:40,c:80,f:20}
+      },
+      maintain:{
+        morning:{name:'Balanced North Breakfast',cal:420,items:[{icon:'🫓',name:'Whole Wheat Paratha',qty:'2'},{icon:'🫙',name:'Curd',qty:'1 cup'},{icon:'🍵',name:'Masala Chai',qty:'1 cup'}],p:16,c:60,f:10},
+        lunch:{name:'Dal Rice Thali',cal:580,items:[{icon:'🫘',name:'Toor Dal',qty:'1 cup'},{icon:'🍚',name:'Rice',qty:'1 cup'},{icon:'🥬',name:'Seasonal Sabzi',qty:'1 cup'},{icon:'🫓',name:'Roti',qty:'1'}],p:22,c:85,f:10},
+        snack:{name:'Light Snack',cal:220,items:[{icon:'🍎',name:'Seasonal Fruit',qty:'1 medium'},{icon:'🥜',name:'Mixed Nuts',qty:'20g'}],p:5,c:30,f:8},
+        dinner:{name:'Light Dal Sabzi',cal:440,items:[{icon:'🫘',name:'Moong Dal',qty:'1 cup'},{icon:'🫓',name:'Roti',qty:'2'},{icon:'🥦',name:'Mixed Sabzi',qty:'1 cup'}],p:18,c:62,f:8}
+      }
+    },
+    nonveg:{
+      loss:{
+        morning:{name:'Egg Paratha Breakfast',cal:380,items:[{icon:'🥚',name:'Boiled Eggs',qty:'3 whites + 1 whole'},{icon:'🫓',name:'Multigrain Roti',qty:'2'},{icon:'🍵',name:'Green Tea',qty:'1 cup'}],p:28,c:36,f:8},
+        lunch:{name:'Chicken Dal Rice',cal:520,items:[{icon:'🍗',name:'Grilled Chicken Breast',qty:'150g'},{icon:'🫘',name:'Dal',qty:'1 cup'},{icon:'🍚',name:'Brown Rice',qty:'0.5 cup'},{icon:'🥗',name:'Salad',qty:'1 bowl'}],p:48,c:52,f:9},
+        snack:{name:'Protein Snack',cal:200,items:[{icon:'🥚',name:'Boiled Egg',qty:'2'},{icon:'🫙',name:'Chaas',qty:'1 glass'}],p:18,c:10,f:6},
+        dinner:{name:'Fish Curry Roti',cal:420,items:[{icon:'🐟',name:'Rohu/Katla Fish Curry',qty:'150g'},{icon:'🫓',name:'Roti',qty:'2'},{icon:'🥬',name:'Sabzi',qty:'1 cup'}],p:36,c:42,f:10}
+      },
+      gain:{
+        morning:{name:'High Protein Egg Breakfast',cal:680,items:[{icon:'🥚',name:'Omelette (4 eggs)',qty:'4 eggs with ghee'},{icon:'🫓',name:'Paratha',qty:'3'},{icon:'🥛',name:'Full Fat Milk',qty:'2 glasses'}],p:38,c:72,f:24},
+        lunch:{name:'Chicken Rice Feast',cal:820,items:[{icon:'🍗',name:'Chicken Curry',qty:'250g chicken'},{icon:'🍚',name:'White Rice',qty:'2 cups'},{icon:'🫘',name:'Dal',qty:'1 cup'},{icon:'🫓',name:'Roti',qty:'2'}],p:58,c:105,f:18},
+        snack:{name:'Egg Peanut Shake',cal:450,items:[{icon:'🥚',name:'Boiled Eggs',qty:'3'},{icon:'🥜',name:'Peanut Butter',qty:'2 tbsp'},{icon:'🍌',name:'Banana',qty:'2'},{icon:'🥛',name:'Milk',qty:'1 glass'}],p:32,c:55,f:16},
+        dinner:{name:'Mutton Dal Roti',cal:720,items:[{icon:'🍖',name:'Mutton Curry (lean)',qty:'200g'},{icon:'🫘',name:'Dal Makhani',qty:'1 cup'},{icon:'🫓',name:'Roti',qty:'3'}],p:52,c:68,f:22}
+      },
+      maintain:{
+        morning:{name:'Egg Roti Breakfast',cal:440,items:[{icon:'🥚',name:'Scrambled Eggs',qty:'3 eggs'},{icon:'🫓',name:'Whole Wheat Roti',qty:'2'},{icon:'🍵',name:'Chai',qty:'1 cup'}],p:24,c:48,f:14},
+        lunch:{name:'Chicken Dal Lunch',cal:600,items:[{icon:'🍗',name:'Chicken Curry',qty:'150g'},{icon:'🫘',name:'Dal',qty:'1 cup'},{icon:'🍚',name:'Rice',qty:'1 cup'},{icon:'🥗',name:'Salad',qty:'1 bowl'}],p:40,c:72,f:12},
+        snack:{name:'Evening Snack',cal:220,items:[{icon:'🥚',name:'Boiled Egg',qty:'1'},{icon:'🍌',name:'Banana',qty:'1'},{icon:'🧃',name:'Chaas',qty:'1 glass'}],p:12,c:28,f:5},
+        dinner:{name:'Fish Roti Dinner',cal:460,items:[{icon:'🐟',name:'Fish Curry',qty:'150g'},{icon:'🫓',name:'Roti',qty:'2'},{icon:'🥬',name:'Sabzi',qty:'1 cup'}],p:34,c:44,f:12}
+      }
+    }
+  },
+  south:{
+    veg:{
+      loss:{
+        morning:{name:'South Indian Light Breakfast',cal:300,items:[{icon:'🫓',name:'Idli (2 pcs)',qty:'2 idli'},{icon:'🥥',name:'Sambar',qty:'1 bowl'},{icon:'🌿',name:'Coconut Chutney',qty:'2 tbsp'}],p:10,c:48,f:5},
+        lunch:{name:'Sambar Rice Thali',cal:460,items:[{icon:'🍚',name:'Brown Rice',qty:'1 cup'},{icon:'🍲',name:'Sambar',qty:'1.5 cups'},{icon:'🥥',name:'Rasam',qty:'1 cup'},{icon:'🥗',name:'Papad + Salad',qty:'1 each'}],p:16,c:72,f:7},
+        snack:{name:'Buttermilk Snack',cal:120,items:[{icon:'🧃',name:'Chaas (Buttermilk)',qty:'2 glasses'},{icon:'🌶️',name:'Roasted Peanuts',qty:'20g'}],p:8,c:12,f:4},
+        dinner:{name:'Kootu + Roti',cal:380,items:[{icon:'🥬',name:'Mixed Veg Kootu',qty:'1 cup'},{icon:'🫓',name:'Wheat Chapati',qty:'2'},{icon:'🍲',name:'Rasam',qty:'1 cup'}],p:14,c:56,f:7}
+      },
+      gain:{
+        morning:{name:'Masala Dosa Feast',cal:620,items:[{icon:'🫓',name:'Masala Dosa',qty:'2 large'},{icon:'🥥',name:'Coconut Chutney',qty:'4 tbsp'},{icon:'🍲',name:'Sambar',qty:'1 bowl'},{icon:'🥛',name:'Full Fat Milk',qty:'1 glass'}],p:20,c:88,f:18},
+        lunch:{name:'Pongal Protein Bowl',cal:780,items:[{icon:'🍚',name:'Ven Pongal',qty:'2 cups'},{icon:'🫘',name:'Dal',qty:'1 cup'},{icon:'🧀',name:'Paneer Curry',qty:'150g'},{icon:'🥥',name:'Coconut Rice',qty:'0.5 cup'}],p:32,c:106,f:18},
+        snack:{name:'Banana Milk Shake',cal:420,items:[{icon:'🍌',name:'Nendran Banana',qty:'2'},{icon:'🥛',name:'Full Fat Milk',qty:'2 glasses'},{icon:'🥜',name:'Groundnut Paste',qty:'1 tbsp'}],p:16,c:68,f:10},
+        dinner:{name:'Curd Rice + Curry',cal:640,items:[{icon:'🍚',name:'Curd Rice',qty:'2 cups'},{icon:'🍲',name:'Chicken/Paneer Curry',qty:'150g'},{icon:'🥗',name:'Pickle + Papad',qty:'2 each'}],p:28,c:88,f:14}
+      },
+      maintain:{
+        morning:{name:'Idli Sambar',cal:380,items:[{icon:'🫓',name:'Idli',qty:'3 pcs'},{icon:'🍲',name:'Sambar',qty:'1.5 bowls'},{icon:'🌿',name:'Chutneys',qty:'3 tbsp'}],p:14,c:58,f:6},
+        lunch:{name:'Rice Thali',cal:560,items:[{icon:'🍚',name:'Rice',qty:'1.5 cups'},{icon:'🍲',name:'Sambar + Rasam',qty:'1 each'},{icon:'🥬',name:'Kootu',qty:'1 cup'},{icon:'🥥',name:'Pappadom',qty:'1'}],p:18,c:84,f:9},
+        snack:{name:'Evening Coffee + Snack',cal:200,items:[{icon:'☕',name:'Filter Coffee',qty:'1 cup'},{icon:'🫓',name:'Murukku/Mixture',qty:'30g'}],p:5,c:28,f:7},
+        dinner:{name:'Dosa + Chutney',cal:380,items:[{icon:'🫓',name:'Plain Dosa',qty:'2'},{icon:'🌿',name:'Chutneys (2 types)',qty:'4 tbsp'},{icon:'🍲',name:'Sambar',qty:'1 cup'}],p:10,c:58,f:8}
+      }
+    },
+    nonveg:{
+      loss:{
+        morning:{name:'Egg Dosa Breakfast',cal:360,items:[{icon:'🥚',name:'Egg Dosa',qty:'2 with 2 eggs'},{icon:'🌿',name:'Coconut Chutney',qty:'2 tbsp'},{icon:'🍵',name:'Black Coffee',qty:'1 cup'}],p:22,c:44,f:10},
+        lunch:{name:'Fish Rice Thali',cal:500,items:[{icon:'🐟',name:'Fish Curry (Kerala style)',qty:'150g'},{icon:'🍚',name:'Brown Rice',qty:'1 cup'},{icon:'🥗',name:'Veg Thoran',qty:'1 cup'},{icon:'🍲',name:'Rasam',qty:'1 cup'}],p:36,c:58,f:10},
+        snack:{name:'Egg Chaas',cal:180,items:[{icon:'🥚',name:'Boiled Eggs',qty:'2'},{icon:'🧃',name:'Chaas',qty:'1 glass'}],p:16,c:8,f:6},
+        dinner:{name:'Chicken Curry Roti',cal:440,items:[{icon:'🍗',name:'Kerala Chicken Curry',qty:'150g'},{icon:'🫓',name:'Wheat Chapati',qty:'2'},{icon:'🥬',name:'Stir-fry Veg',qty:'1 cup'}],p:38,c:42,f:12}
+      },
+      gain:{
+        morning:{name:'Egg Appam Breakfast',cal:680,items:[{icon:'🫓',name:'Appam',qty:'4'},{icon:'🥚',name:'Egg Curry',qty:'3 eggs'},{icon:'🥥',name:'Coconut Milk Stew',qty:'1 cup'},{icon:'🥛',name:'Milk',qty:'1 glass'}],p:32,c:84,f:20},
+        lunch:{name:'Chicken Biryani Feast',cal:860,items:[{icon:'🍗',name:'Chicken Biryani',qty:'350g'},{icon:'🫙',name:'Raita',qty:'1 cup'},{icon:'🥗',name:'Shorba',qty:'1 bowl'},{icon:'🥚',name:'Boiled Egg',qty:'2'}],p:54,c:102,f:22},
+        snack:{name:'Fish Egg Shake',cal:420,items:[{icon:'🥜',name:'Peanut Butter',qty:'2 tbsp'},{icon:'🥚',name:'Boiled Eggs',qty:'3'},{icon:'🍌',name:'Banana',qty:'2'}],p:30,c:52,f:16},
+        dinner:{name:'Mutton Appam Dinner',cal:740,items:[{icon:'🍖',name:'Mutton Stew',qty:'200g'},{icon:'🫓',name:'Appam',qty:'4'},{icon:'🥗',name:'Kachumber',qty:'1 bowl'}],p:50,c:72,f:22}
+      },
+      maintain:{
+        morning:{name:'Egg Upma',cal:420,items:[{icon:'🥚',name:'Egg Bhurji',qty:'3 eggs'},{icon:'🫓',name:'Rava Upma',qty:'1 cup'},{icon:'🌿',name:'Coconut Chutney',qty:'2 tbsp'}],p:22,c:54,f:12},
+        lunch:{name:'Fish Rice Lunch',cal:580,items:[{icon:'🐟',name:'Fish Curry',qty:'150g'},{icon:'🍚',name:'Rice',qty:'1 cup'},{icon:'🥬',name:'Veg Stir Fry',qty:'1 cup'},{icon:'🍲',name:'Rasam',qty:'1 cup'}],p:38,c:68,f:12},
+        snack:{name:'Tea Biscuit Egg',cal:230,items:[{icon:'☕',name:'Tea',qty:'1 cup'},{icon:'🥚',name:'Boiled Egg',qty:'1'},{icon:'🫓',name:'Marie Biscuits',qty:'4'}],p:10,c:28,f:6},
+        dinner:{name:'Chicken Curry Roti',cal:480,items:[{icon:'🍗',name:'Chicken Curry',qty:'150g'},{icon:'🫓',name:'Chapati',qty:'2'},{icon:'🥬',name:'Sabzi',qty:'1 cup'}],p:36,c:48,f:12}
+      }
+    }
+  },
+  east:{
+    veg:{
+      loss:{
+        morning:{name:'Bengali Light Breakfast',cal:310,items:[{icon:'🍵',name:'Muri (Puffed Rice)',qty:'2 cups'},{icon:'🫙',name:'Dahi',qty:'1 cup'},{icon:'🍌',name:'Banana',qty:'1'}],p:10,c:50,f:4},
+        lunch:{name:'Bhaat Dal Torkari',cal:470,items:[{icon:'🍚',name:'Brown Rice',qty:'1 cup'},{icon:'🫘',name:'Musur Dal',qty:'1 cup'},{icon:'🥬',name:'Shukto (Mixed Veg)',qty:'1 cup'},{icon:'🌿',name:'Begun Bhaja',qty:'2 pcs'}],p:16,c:72,f:8},
+        snack:{name:'Muri Chanachur',cal:160,items:[{icon:'🍵',name:'Muri (Puffed Rice)',qty:'1 cup'},{icon:'🌶️',name:'Chanachur',qty:'30g'}],p:5,c:28,f:4},
+        dinner:{name:'Dal Roti Sabzi',cal:380,items:[{icon:'🫘',name:'Dal',qty:'1 cup'},{icon:'🫓',name:'Roti',qty:'2'},{icon:'🥬',name:'Saag',qty:'1 cup'}],p:14,c:56,f:6}
+      },
+      gain:{
+        morning:{name:'Luchi Aloo Feast',cal:620,items:[{icon:'🫓',name:'Luchi (Puri)',qty:'6 pcs'},{icon:'🥔',name:'Aloo Dum',qty:'1 cup'},{icon:'🥛',name:'Full Cream Milk',qty:'2 glasses'},{icon:'🫙',name:'Mishti Doi',qty:'1 cup'}],p:22,c:94,f:18},
+        lunch:{name:'Khichuri Feast',cal:780,items:[{icon:'🍚',name:'Bhuni Khichuri',qty:'2 cups'},{icon:'🥔',name:'Aloo + Veg Fry',qty:'1 cup'},{icon:'🧀',name:'Chena (Paneer)',qty:'100g'},{icon:'🫙',name:'Curd',qty:'1 cup'}],p:30,c:108,f:16},
+        snack:{name:'Mishti Snack',cal:380,items:[{icon:'🍮',name:'Sandesh',qty:'2 pcs'},{icon:'🥜',name:'Peanuts',qty:'40g'},{icon:'🥛',name:'Milk',qty:'1 glass'}],p:18,c:48,f:14},
+        dinner:{name:'Paneer Roti',cal:660,items:[{icon:'🧀',name:'Paneer Curry',qty:'200g'},{icon:'🫓',name:'Roti',qty:'4'},{icon:'🫘',name:'Dal',qty:'1 cup'}],p:40,c:78,f:20}
+      },
+      maintain:{
+        morning:{name:'Poha or Upma',cal:380,items:[{icon:'🍚',name:'Chira (Poha)',qty:'1 cup dry'},{icon:'🫙',name:'Dahi',qty:'1 cup'},{icon:'🍌',name:'Banana',qty:'1'}],p:12,c:60,f:6},
+        lunch:{name:'Dal Bhaat Torkari',cal:550,items:[{icon:'🍚',name:'Rice',qty:'1 cup'},{icon:'🫘',name:'Dal',qty:'1 cup'},{icon:'🥬',name:'Veg Curry',qty:'1 cup'},{icon:'🌿',name:'Chutney',qty:'2 tbsp'}],p:18,c:82,f:9},
+        snack:{name:'Evening Snack',cal:200,items:[{icon:'🍵',name:'Cha (Tea)',qty:'1 cup'},{icon:'🍪',name:'Muri/Biscuit',qty:'1 cup/4 pcs'}],p:4,c:32,f:5},
+        dinner:{name:'Light Dal Roti',cal:420,items:[{icon:'🫘',name:'Moong Dal',qty:'1 cup'},{icon:'🫓',name:'Roti',qty:'2'},{icon:'🥬',name:'Sabzi',qty:'1 cup'}],p:16,c:62,f:7}
+      }
+    },
+    nonveg:{
+      loss:{
+        morning:{name:'Egg Muri Breakfast',cal:350,items:[{icon:'🥚',name:'Boiled Eggs',qty:'3'},{icon:'🍵',name:'Muri',qty:'1.5 cups'},{icon:'🌿',name:'Green Chutney',qty:'2 tbsp'}],p:22,c:38,f:8},
+        lunch:{name:'Maacher Jhol Bhaat',cal:490,items:[{icon:'🐟',name:'Rohu Maacher Jhol',qty:'200g fish'},{icon:'🍚',name:'Brown Rice',qty:'1 cup'},{icon:'🥬',name:'Dal',qty:'0.5 cup'},{icon:'🥗',name:'Kumro Bhaja',qty:'1 cup'}],p:38,c:55,f:10},
+        snack:{name:'Egg Chaas',cal:180,items:[{icon:'🥚',name:'Boiled Egg',qty:'2'},{icon:'🧃',name:'Ghol (Chaas)',qty:'1 glass'}],p:16,c:8,f:6},
+        dinner:{name:'Chicken Dal Roti',cal:430,items:[{icon:'🍗',name:'Chicken Curry',qty:'150g'},{icon:'🫘',name:'Dal',qty:'0.5 cup'},{icon:'🫓',name:'Roti',qty:'2'}],p:36,c:42,f:10}
+      },
+      gain:{
+        morning:{name:'Egg Parota Feast',cal:720,items:[{icon:'🥚',name:'Egg Bhurji (5 eggs)',qty:'5 eggs'},{icon:'🫓',name:'Parota',qty:'4 pcs'},{icon:'🥛',name:'Full Cream Milk',qty:'2 glasses'}],p:42,c:82,f:24},
+        lunch:{name:'Mutton Biryani',cal:880,items:[{icon:'🍖',name:'Mutton Biryani',qty:'350g'},{icon:'🫙',name:'Raita',qty:'1 cup'},{icon:'🥚',name:'Boiled Egg',qty:'2'},{icon:'🥗',name:'Salad',qty:'1 bowl'}],p:56,c:98,f:26},
+        snack:{name:'Fish Egg Shake',cal:440,items:[{icon:'🥜',name:'Sattu (Roasted Gram)',qty:'4 tbsp'},{icon:'🥚',name:'Boiled Eggs',qty:'3'},{icon:'🍌',name:'Banana',qty:'2'}],p:32,c:58,f:12},
+        dinner:{name:'Prawn Dal Roti',cal:720,items:[{icon:'🦐',name:'Chingri Malaikari',qty:'200g'},{icon:'🫘',name:'Dal',qty:'1 cup'},{icon:'🫓',name:'Roti',qty:'3'}],p:48,c:70,f:24}
+      },
+      maintain:{
+        morning:{name:'Egg Roti',cal:440,items:[{icon:'🥚',name:'Dim Bhurji (3 eggs)',qty:'3 eggs'},{icon:'🫓',name:'Roti',qty:'2'},{icon:'🍵',name:'Cha',qty:'1 cup'}],p:22,c:48,f:14},
+        lunch:{name:'Fish Rice Dal',cal:580,items:[{icon:'🐟',name:'Maacher Jhol',qty:'150g'},{icon:'🍚',name:'Rice',qty:'1 cup'},{icon:'🫘',name:'Dal',qty:'0.5 cup'},{icon:'🥬',name:'Veg Torkari',qty:'1 cup'}],p:36,c:70,f:12},
+        snack:{name:'Muri Egg',cal:220,items:[{icon:'🍵',name:'Muri',qty:'1 cup'},{icon:'🥚',name:'Boiled Egg',qty:'1'},{icon:'🍵',name:'Tea',qty:'1 cup'}],p:10,c:28,f:6},
+        dinner:{name:'Chicken Roti Dinner',cal:460,items:[{icon:'🍗',name:'Chicken Curry',qty:'150g'},{icon:'🫓',name:'Roti',qty:'2'},{icon:'🥬',name:'Dal Sabzi',qty:'1 cup'}],p:34,c:46,f:12}
+      }
+    }
+  },
+  west:{
+    veg:{
+      loss:{
+        morning:{name:'Gujarati Light Breakfast',cal:290,items:[{icon:'🫓',name:'Thepla',qty:'2'},{icon:'🫙',name:'Low Fat Dahi',qty:'1 cup'},{icon:'🌿',name:'Green Chutney',qty:'2 tbsp'}],p:10,c:44,f:6},
+        lunch:{name:'Dal Dhokli Bowl',cal:450,items:[{icon:'🫘',name:'Dal Dhokli',qty:'1.5 cups'},{icon:'🥗',name:'Kachumber Salad',qty:'1 bowl'},{icon:'🧃',name:'Chaas',qty:'1 glass'}],p:16,c:68,f:7},
+        snack:{name:'Khakra Chaas',cal:150,items:[{icon:'🫓',name:'Khakra',qty:'4 pcs'},{icon:'🧃',name:'Chaas',qty:'1 glass'}],p:7,c:22,f:3},
+        dinner:{name:'Khichdi Kadhi',cal:380,items:[{icon:'🍚',name:'Moong Dal Khichdi',qty:'1.5 cups'},{icon:'🍲',name:'Kadhi',qty:'1 cup'},{icon:'🥬',name:'Stir Fry Veg',qty:'1 cup'}],p:14,c:58,f:7}
+      },
+      gain:{
+        morning:{name:'Poha Shira Feast',cal:620,items:[{icon:'🍚',name:'Batata Poha',qty:'1.5 cups'},{icon:'🍮',name:'Semolina Shira',qty:'1 cup'},{icon:'🥛',name:'Full Fat Milk',qty:'2 glasses'},{icon:'🫙',name:'Curd',qty:'1 cup'}],p:20,c:90,f:14},
+        lunch:{name:'Rajwadi Thali',cal:800,items:[{icon:'🫘',name:'Dal Baati',qty:'3 baati'},{icon:'🧀',name:'Paneer Sabzi',qty:'150g'},{icon:'🍚',name:'Rice',qty:'1 cup'},{icon:'🧈',name:'Ghee',qty:'2 tbsp'}],p:30,c:108,f:22},
+        snack:{name:'Chikki Milk',cal:380,items:[{icon:'🍬',name:'Groundnut Chikki',qty:'60g'},{icon:'🥛',name:'Full Fat Milk',qty:'2 glasses'},{icon:'🍌',name:'Banana',qty:'1'}],p:16,c:54,f:16},
+        dinner:{name:'Paneer Roti Ghee',cal:680,items:[{icon:'🧀',name:'Paneer Tikka Masala',qty:'200g'},{icon:'🫓',name:'Roti with Ghee',qty:'4'},{icon:'🫘',name:'Dal Makhani',qty:'1 cup'}],p:42,c:76,f:24}
+      },
+      maintain:{
+        morning:{name:'Poha Chai',cal:360,items:[{icon:'🍚',name:'Batata Poha',qty:'1 cup'},{icon:'☕',name:'Masala Chai',qty:'1 cup'},{icon:'🍌',name:'Banana',qty:'1'}],p:10,c:58,f:7},
+        lunch:{name:'Gujarati Thali',cal:560,items:[{icon:'🫘',name:'Dal',qty:'1 cup'},{icon:'🍚',name:'Rice',qty:'1 cup'},{icon:'🥬',name:'Shaak (Sabzi)',qty:'1 cup'},{icon:'🫓',name:'Roti',qty:'1'}],p:18,c:84,f:10},
+        snack:{name:'Dhokla Chai',cal:200,items:[{icon:'🫓',name:'Dhokla',qty:'4 pcs'},{icon:'🌿',name:'Green Chutney',qty:'2 tbsp'},{icon:'☕',name:'Chai',qty:'1 cup'}],p:8,c:28,f:5},
+        dinner:{name:'Khichdi Dinner',cal:420,items:[{icon:'🍚',name:'Khichdi',qty:'1.5 cups'},{icon:'🧈',name:'Ghee',qty:'1 tsp'},{icon:'🍲',name:'Kadhi',qty:'1 cup'},{icon:'🫙',name:'Pickle',qty:'1 tsp'}],p:14,c:64,f:8}
+      }
+    },
+    nonveg:{
+      loss:{
+        morning:{name:'Egg Poha Breakfast',cal:360,items:[{icon:'🥚',name:'Boiled Eggs',qty:'3'},{icon:'🍚',name:'Kanda Poha',qty:'1 cup'},{icon:'🍵',name:'Green Tea',qty:'1 cup'}],p:24,c:38,f:8},
+        lunch:{name:'Chicken Khichdi',cal:480,items:[{icon:'🍗',name:'Grilled Chicken',qty:'150g'},{icon:'🍚',name:'Moong Dal Khichdi',qty:'1 cup'},{icon:'🥗',name:'Salad',qty:'1 bowl'}],p:44,c:50,f:9},
+        snack:{name:'Sprouts Chaas',cal:160,items:[{icon:'🫘',name:'Moong Sprouts',qty:'1 cup'},{icon:'🧃',name:'Chaas',qty:'1 glass'}],p:12,c:18,f:3},
+        dinner:{name:'Fish Roti Dinner',cal:420,items:[{icon:'🐟',name:'Bombil/Rawas Fish',qty:'150g'},{icon:'🫓',name:'Roti',qty:'2'},{icon:'🥬',name:'Sabzi',qty:'1 cup'}],p:36,c:40,f:10}
+      },
+      gain:{
+        morning:{name:'Egg Paratha Feast',cal:700,items:[{icon:'🥚',name:'Egg Bhurji (5)',qty:'5 eggs'},{icon:'🫓',name:'Paratha with Ghee',qty:'3'},{icon:'🥛',name:'Full Fat Milk',qty:'2 glasses'}],p:40,c:78,f:24},
+        lunch:{name:'Chicken Pulao Thali',cal:840,items:[{icon:'🍗',name:'Chicken Curry',qty:'250g'},{icon:'🍚',name:'Pulao',qty:'2 cups'},{icon:'🫘',name:'Dal',qty:'1 cup'},{icon:'🫙',name:'Raita',qty:'1 cup'}],p:58,c:102,f:20},
+        snack:{name:'Peanut Egg Shake',cal:440,items:[{icon:'🥜',name:'Peanut Butter',qty:'3 tbsp'},{icon:'🥚',name:'Boiled Eggs',qty:'3'},{icon:'🍌',name:'Banana',qty:'2'},{icon:'🥛',name:'Milk',qty:'1 glass'}],p:34,c:56,f:18},
+        dinner:{name:'Mutton Roti Dinner',cal:740,items:[{icon:'🍖',name:'Mutton Curry',qty:'200g'},{icon:'🫓',name:'Roti',qty:'3'},{icon:'🫘',name:'Dal',qty:'1 cup'}],p:52,c:70,f:24}
+      },
+      maintain:{
+        morning:{name:'Egg Poha',cal:440,items:[{icon:'🥚',name:'Omelette (3 eggs)',qty:'3 eggs'},{icon:'🍚',name:'Poha',qty:'1 cup'},{icon:'☕',name:'Chai',qty:'1 cup'}],p:22,c:50,f:14},
+        lunch:{name:'Chicken Dal Rice',cal:580,items:[{icon:'🍗',name:'Chicken Curry',qty:'150g'},{icon:'🫘',name:'Dal',qty:'1 cup'},{icon:'🍚',name:'Rice',qty:'1 cup'},{icon:'🥗',name:'Salad',qty:'1 bowl'}],p:40,c:68,f:12},
+        snack:{name:'Sprouts + Tea',cal:210,items:[{icon:'🫘',name:'Sprouted Moong',qty:'1 cup'},{icon:'🌶️',name:'Chaat Masala',qty:'pinch'},{icon:'☕',name:'Chai',qty:'1 cup'}],p:10,c:28,f:4},
+        dinner:{name:'Fish Chapati',cal:460,items:[{icon:'🐟',name:'Fish Curry',qty:'150g'},{icon:'🫓',name:'Chapati',qty:'2'},{icon:'🥬',name:'Sabzi',qty:'1 cup'}],p:34,c:46,f:12}
+      }
+    }
+  }
+};
+
+/* FOOD DB */
+const FOOD_DB = [
+  {icon:'🫘',name:'Masoor Dal',cat:'Legume',cal:'230/cup',pro:'18g',car:'40g'},
+  {icon:'🧀',name:'Paneer',cat:'Dairy',cal:'265/100g',pro:'18g',car:'3g'},
+  {icon:'🥚',name:'Egg',cat:'Protein',cal:'70/egg',pro:'6g',car:'0.5g'},
+  {icon:'🫓',name:'Whole Wheat Roti',cat:'Grain',cal:'70/roti',pro:'3g',car:'15g'},
+  {icon:'🍚',name:'Brown Rice',cat:'Grain',cal:'215/cup',pro:'5g',car:'45g'},
+  {icon:'🥛',name:'Full Fat Milk',cat:'Dairy',cal:'150/glass',pro:'8g',car:'12g'},
+  {icon:'🫙',name:'Dahi (Curd)',cat:'Dairy',cal:'100/cup',pro:'11g',car:'7g'},
+  {icon:'🥜',name:'Peanut Butter',cat:'Fat/Protein',cal:'190/2tbsp',pro:'8g',car:'6g'},
+  {icon:'🍗',name:'Chicken Breast',cat:'Protein',cal:'165/100g',pro:'31g',car:'0g'},
+  {icon:'🐟',name:'Rohu Fish',cat:'Protein',cal:'97/100g',pro:'17g',car:'0g'},
+  {icon:'🍌',name:'Banana',cat:'Fruit',cal:'105/medium',pro:'1.3g',car:'27g'},
+  {icon:'🌾',name:'Oats',cat:'Grain',cal:'150/half cup',pro:'5g',car:'27g'},
+  {icon:'🥬',name:'Palak (Spinach)',cat:'Vegetable',cal:'23/cup',pro:'3g',car:'3.6g'},
+  {icon:'🫘',name:'Rajma',cat:'Legume',cal:'225/cup',pro:'15g',car:'40g'},
+  {icon:'🧃',name:'Chaas',cat:'Dairy',cal:'40/glass',pro:'3g',car:'5g'},
+  {icon:'🥔',name:'Sweet Potato',cat:'Vegetable',cal:'103/medium',pro:'2g',car:'24g'},
+  {icon:'🌰',name:'Almonds',cat:'Nuts',cal:'164/28g',pro:'6g',car:'6g'},
+  {icon:'🫘',name:'Moong Dal',cat:'Legume',cal:'212/cup',pro:'14g',car:'38g'},
+];
+
+/* STATE */
+let filters = {goal:'loss', region:'north', diet:'veg', budget:'medium'};
+
+function setFilter(group, val) {
+  filters[group] = val;
+  document.querySelectorAll(`[data-group="${group}"]`).forEach(c => {
+    c.className = 'chip';
+    if (c.dataset.val === val) c.classList.add(`active-${group}`);
+  });
+  renderAll();
+}
+
+const calMap = {loss:{low:1400,medium:1600,high:1800}, gain:{low:2400,medium:2800,high:3200}, maintain:{low:1800,medium:2200,high:2600}};
+
+function renderAll() {
+  const {goal, region, diet, budget} = filters;
+  const calories = calMap[goal][budget];
+  const macroSplits = {loss:{p:.35,c:.40,f:.25}, gain:{p:.30,c:.45,f:.25}, maintain:{p:.25,c:.50,f:.25}};
+  const s = macroSplits[goal];
+  const protein = Math.round((calories*s.p)/4);
+  const carbs   = Math.round((calories*s.c)/4);
+  const fat     = Math.round((calories*s.f)/9);
+
+  document.getElementById('mCal').textContent = calories;
+  document.getElementById('mPro').textContent = protein;
+  document.getElementById('mCar').textContent = carbs;
+  document.getElementById('mFat').textContent = fat;
+  document.getElementById('macroNote').textContent = `Optimised for ${goal==='loss'?'fat loss':goal==='gain'?'muscle gain':'maintenance'} · ${region.charAt(0).toUpperCase()+region.slice(1)} Indian cuisine · ${diet==='veg'?'Vegetarian':'Non-Vegetarian'} · ${budget.charAt(0).toUpperCase()+budget.slice(1)} budget`;
+
+  const plan = MEALS[region]?.[diet]?.[goal];
+  if (!plan) { document.getElementById('mealPlan').innerHTML='<p style="color:var(--text2);text-align:center;padding:2rem;">No plan for this combination yet. Try a different filter!</p>'; return; }
+
+  const meals = [
+    {key:'morning', label:'🌅 Breakfast', badge:'badge-morning'},
+    {key:'lunch',   label:'☀️ Lunch',     badge:'badge-lunch'},
+    {key:'snack',   label:'🌤️ Snack',    badge:'badge-snack'},
+    {key:'dinner',  label:'🌙 Dinner',    badge:'badge-dinner'},
+  ];
+
+  document.getElementById('mealPlan').innerHTML = meals.map(m => {
+    const meal = plan[m.key];
+    if (!meal) return '';
+    return `
+    <div class="meal-card">
+      <div class="meal-header">
+        <span class="meal-time-badge ${m.badge}">${m.label}</span>
+        <span class="meal-name">${meal.name}</span>
+        <span class="meal-cal-badge">🔥 ${meal.cal} kcal</span>
+      </div>
+      <div class="meal-body">
+        <div class="meal-items">
+          ${meal.items.map(i=>`<div class="meal-item"><span class="meal-item-icon">${i.icon}</span><span class="meal-item-name">${i.name}</span><span class="meal-item-qty">${i.qty}</span></div>`).join('')}
+        </div>
+        <div class="meal-macros">
+          <div style="color:var(--green);font-weight:700">P: ${meal.p}g</div>
+          <div style="color:var(--blue);font-weight:700">C: ${meal.c}g</div>
+          <div style="color:var(--orange);font-weight:700">F: ${meal.f}g</div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  // Food DB
+  document.getElementById('foodDb').innerHTML = FOOD_DB.map((f,i)=>`
+    <div class="food-item-card" style="animation-delay:${i*.04}s">
+      <div class="fi-top">
+        <span class="fi-icon">${f.icon}</span>
+        <div><div class="fi-name">${f.name}</div><div class="fi-cat">${f.cat}</div></div>
+      </div>
+      <div class="fi-macros">
+        <span class="fi-macro fi-cal">🔥 ${f.cal}</span>
+        <span class="fi-macro fi-pro">💪 ${f.pro}</span>
+        <span class="fi-macro fi-car">🍞 ${f.car}</span>
+      </div>
+    </div>`).join('');
+}
+
+/* THEME */
+const themeBtn = document.getElementById('themeBtn');
+function applyTheme(t) { document.documentElement.setAttribute('data-theme',t); themeBtn.textContent=t==='dark'?'☀':'☽'; localStorage.setItem('fpTheme',t); }
+themeBtn.addEventListener('click', ()=>applyTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark'));
+applyTheme(localStorage.getItem('fpTheme')||'dark');
+renderAll();
+</script>
+</body>
+</html>
