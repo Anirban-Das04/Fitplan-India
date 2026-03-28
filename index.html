@@ -265,6 +265,45 @@
       .nav-links .nav-link span.nav-label { display: none; }
       .nav-link { padding: 0.45rem 0.65rem; }
     }
+
+    /* ── WATER TRACKER ── */
+    .water-section{max-width:1100px;margin:2rem auto 0;padding:0 1.5rem;}
+    .water-card{background:linear-gradient(135deg,rgba(59,130,246,0.08),rgba(110,231,183,0.05));border:1px solid rgba(59,130,246,0.2);border-radius:24px;padding:1.75rem;backdrop-filter:blur(20px);}
+    .water-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:.75rem;}
+    .water-title-wrap{display:flex;align-items:center;gap:.75rem;}
+    .water-icon-big{font-size:2rem;animation:wfloat 3s ease-in-out infinite;}
+    @keyframes wfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)};}
+    .water-title{font-family:var(--font-display);font-size:1rem;font-weight:800;color:var(--text);}
+    .water-subtitle{font-size:.75rem;color:var(--text-2);margin-top:2px;}
+    .water-badges{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;}
+    .water-streak-badge{padding:.3rem .8rem;border-radius:100px;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25);color:#3B82F6;font-size:.72rem;font-weight:700;}
+    .water-time-badge{padding:.3rem .8rem;border-radius:100px;background:var(--surface-2);border:1px solid var(--border);color:var(--text-2);font-size:.72rem;}
+    .water-progress-wrap{margin-bottom:1.25rem;}
+    .water-progress-bar{height:12px;background:var(--surface-2);border-radius:100px;overflow:hidden;margin-bottom:.5rem;}
+    .water-progress-fill{height:100%;background:linear-gradient(90deg,#60A5FA,#3B82F6,#06B6D4);border-radius:100px;transition:width .6s cubic-bezier(0.34,1.56,0.64,1);position:relative;overflow:hidden;}
+    .water-progress-fill::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);animation:wshimmer 2s infinite;}
+    @keyframes wshimmer{to{left:100%;}}
+    .water-progress-labels{display:flex;justify-content:space-between;font-size:.72rem;color:var(--text-2);}
+    .water-progress-labels .wcurrent{color:#3B82F6;font-weight:700;}
+    .glasses-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:.5rem;margin-bottom:1.25rem;}
+    .glass-btn{aspect-ratio:1;border-radius:12px;border:2px solid var(--border);background:var(--surface-2);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;transition:all .25s cubic-bezier(0.34,1.56,0.64,1);position:relative;overflow:hidden;}
+    .glass-btn:hover{transform:translateY(-3px) scale(1.06);}
+    .glass-btn.wfilled{background:linear-gradient(180deg,rgba(96,165,250,.2),rgba(59,130,246,.35));border-color:rgba(59,130,246,.5);box-shadow:0 4px 16px rgba(59,130,246,.2);}
+    .glass-btn.wfilled::before{content:'';position:absolute;bottom:0;left:0;right:0;height:60%;background:linear-gradient(180deg,rgba(59,130,246,.1),rgba(59,130,246,.4));border-radius:0 0 10px 10px;animation:wfillup .4s ease;}
+    @keyframes wfillup{from{height:0}to{height:60%;}}
+    .glass-emoji{font-size:1.2rem;position:relative;z-index:1;}
+    .glass-ml{font-size:.55rem;font-weight:700;color:var(--text-2);position:relative;z-index:1;}
+    .glass-btn.wfilled .glass-ml{color:#3B82F6;}
+    .water-bottom{display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:center;}
+    .water-tip{display:flex;align-items:center;gap:.5rem;padding:.65rem 1rem;background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.12);border-radius:12px;font-size:.78rem;color:var(--text-2);}
+    .water-reset-btn{padding:.55rem 1.1rem;background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.2);border-radius:12px;color:#F87171;font-size:.75rem;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap;}
+    .water-reset-btn:hover{background:rgba(248,113,113,.15);}
+    .water-card.goal-done{background:linear-gradient(135deg,rgba(110,231,183,.1),rgba(59,130,246,.07));border-color:rgba(110,231,183,.35);}
+    .water-card.goal-done .water-progress-fill{background:linear-gradient(90deg,#6EE7B7,#3B82F6);}
+    .water-section-header{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem;}
+    .water-section-tag{background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.25);color:#3B82F6;padding:.25rem .75rem;border-radius:100px;font-size:.72rem;font-weight:700;}
+    .water-section-title{font-size:1.1rem;font-weight:700;font-family:var(--font-display);color:var(--text);}
+    @media(max-width:600px){.glasses-grid{grid-template-columns:repeat(4,1fr);}.water-bottom{grid-template-columns:1fr;}}
   </style>
 </head>
 <body>
@@ -612,6 +651,47 @@
       </div>
     </section>
 
+
+    <!-- ══ WATER TRACKER ══ -->
+    <div class="water-section" id="waterSection">
+      <div class="water-section-header">
+        <span class="water-section-tag">💧 Daily</span>
+        <span class="water-section-title">Water Intake Tracker</span>
+      </div>
+      <div class="water-card" id="waterCard">
+        <div class="water-top">
+          <div class="water-title-wrap">
+            <div class="water-icon-big">💧</div>
+            <div>
+              <div class="water-title">Daily Water Goal</div>
+              <div class="water-subtitle" id="waterSubtitle">Generate your plan above to get your personalised water goal</div>
+            </div>
+          </div>
+          <div class="water-badges">
+            <div class="water-streak-badge" id="waterStreakBadge">🔥 0 day streak</div>
+            <div class="water-time-badge" id="waterTimeBadge">⏰ Not logged yet</div>
+          </div>
+        </div>
+        <div class="water-progress-wrap">
+          <div class="water-progress-bar">
+            <div class="water-progress-fill" id="waterFill" style="width:0%"></div>
+          </div>
+          <div class="water-progress-labels">
+            <span class="wcurrent" id="waterCurrent">0 ml</span>
+            <span id="waterGoalLabel">Goal: 2500 ml</span>
+          </div>
+        </div>
+        <div class="glasses-grid" id="glassesGrid"></div>
+        <div class="water-bottom">
+          <div class="water-tip">
+            <span style="font-size:1rem;flex-shrink:0;">💡</span>
+            <span id="waterTip">Drink a glass of water first thing in the morning — before tea or coffee.</span>
+          </div>
+          <button class="water-reset-btn" onclick="resetWater()">↺ Reset</button>
+        </div>
+      </div>
+    </div>
+
     <footer class="footer">
       <p>FitPlan<em>India</em> · Smart Fitness &amp; Diet Planner · Built with ♥</p>
     </footer>
@@ -635,6 +715,130 @@
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') closeAboutBtn();
     });
-  </script>
+  
+/* ══ WATER TRACKER ══ */
+const W_KEY = 'fp_water';
+const W_STK = 'fp_water_streak';
+const GLASS_ML = 250;
+
+const WATER_TIPS = [
+  'Drink a glass first thing in the morning — before tea or coffee.',
+  'Drink 1 glass before every meal — reduces calorie intake by 13%.',
+  'Keep a bottle on your desk — visibility increases intake by 60%.',
+  'Feeling hungry? Drink water first — 37% of hunger is actually thirst.',
+  'Add lemon or mint to water — makes it easier to drink more.',
+  'Drink 1 glass 30 min before workout and 1 after every 20 min.',
+  'Cold water burns 8 extra kcal per glass — body heats it up.',
+  'Dehydration reduces workout performance by up to 25%.',
+];
+
+function getWaterData(){
+  try{
+    const d=JSON.parse(localStorage.getItem(W_KEY)||'{}');
+    const today=new Date().toISOString().split('T')[0];
+    if(d.date!==today) return{date:today,glasses:0,lastDrank:null};
+    return d;
+  }catch{return{date:new Date().toISOString().split('T')[0],glasses:0,lastDrank:null};}
+}
+function saveWaterData(d){localStorage.setItem(W_KEY,JSON.stringify(d));}
+
+function getWaterGoalMl(){
+  try{
+    const fd=JSON.parse(localStorage.getItem('fpFormData')||'{}');
+    const w=parseFloat(fd.weight)||70;
+    return Math.round(w*35);
+  }catch{return 2500;}
+}
+
+function getWaterStreak(){
+  try{
+    const s=JSON.parse(localStorage.getItem(W_STK)||'{"streak":0,"lastDate":""}');
+    return s.streak||0;
+  }catch{return 0;}
+}
+
+function updateWaterStreak(){
+  try{
+    const s=JSON.parse(localStorage.getItem(W_STK)||'{"streak":0,"lastDate":""}');
+    const today=new Date().toISOString().split('T')[0];
+    const yesterday=new Date(Date.now()-86400000).toISOString().split('T')[0];
+    if(s.lastDate===today) return;
+    s.streak=s.lastDate===yesterday?s.streak+1:1;
+    s.lastDate=today;
+    localStorage.setItem(W_STK,JSON.stringify(s));
+  }catch{}
+}
+
+function timeSince(lastDrank){
+  if(!lastDrank) return 'Not logged yet';
+  const mins=Math.floor((Date.now()-new Date(lastDrank))/60000);
+  if(mins<1) return 'Just now';
+  if(mins<60) return mins+' min ago';
+  const h=Math.floor(mins/60);
+  return h+' hour'+(h>1?'s':'')+' ago';
+}
+
+function renderWater(){
+  const data=getWaterData();
+  const goalMl=getWaterGoalMl();
+  const goalG=Math.ceil(goalMl/GLASS_ML);
+  const filled=data.glasses;
+  const currentMl=filled*GLASS_ML;
+  const pct=Math.min(100,Math.round((currentMl/goalMl)*100));
+  const goalDone=currentMl>=goalMl;
+  const streak=getWaterStreak();
+  const tip=WATER_TIPS[new Date().getDay()%WATER_TIPS.length];
+
+  try{
+    const fd=JSON.parse(localStorage.getItem('fpFormData')||'{}');
+    const w=parseFloat(fd.weight)||70;
+    document.getElementById('waterSubtitle').textContent=
+      'Based on your weight ('+w+'kg) — drink '+(goalMl/1000).toFixed(1)+'L daily ('+goalG+' glasses × 250ml)';
+  }catch{}
+
+  document.getElementById('waterFill').style.width=pct+'%';
+  document.getElementById('waterCurrent').textContent=currentMl+' ml ('+pct+'%)';
+  document.getElementById('waterGoalLabel').textContent='Goal: '+goalMl+' ml';
+  document.getElementById('waterStreakBadge').textContent='🔥 '+streak+' day streak';
+  document.getElementById('waterTimeBadge').textContent='⏰ '+timeSince(data.lastDrank);
+  document.getElementById('waterCard').classList.toggle('goal-done',goalDone);
+  document.getElementById('waterTip').textContent=goalDone?
+    '🎉 Daily goal reached! Excellent hydration today! Come back tomorrow.':tip;
+
+  const grid=document.getElementById('glassesGrid');
+  grid.innerHTML='';
+  const totalBtns=Math.max(8,goalG);
+  for(let i=0;i<totalBtns;i++){
+    const btn=document.createElement('button');
+    btn.className='glass-btn'+(i<filled?' wfilled':'');
+    btn.title=i<filled?'Click to undo':'Add 250ml';
+    btn.innerHTML='<span class="glass-emoji">'+(i<filled?'🥤':'🫙')+'</span><span class="glass-ml">250ml</span>';
+    btn.onclick=()=>toggleGlass(i);
+    grid.appendChild(btn);
+  }
+}
+
+function toggleGlass(idx){
+  const data=getWaterData();
+  const goalMl=getWaterGoalMl();
+  if(idx<data.glasses){data.glasses=idx;}
+  else{data.glasses=idx+1;data.lastDrank=new Date().toISOString();}
+  if(data.glasses*GLASS_ML>=goalMl) updateWaterStreak();
+  saveWaterData(data);
+  renderWater();
+}
+
+function resetWater(){
+  saveWaterData({date:new Date().toISOString().split('T')[0],glasses:0,lastDrank:null});
+  renderWater();
+}
+
+setInterval(()=>{
+  const el=document.getElementById('waterTimeBadge');
+  if(el) el.textContent='⏰ '+timeSince(getWaterData().lastDrank);
+},60000);
+
+renderWater();
+</script>
 </body>
 </html>
