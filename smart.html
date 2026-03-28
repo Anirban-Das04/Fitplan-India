@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Smart Recommendations — FitPlan India</title>
+  <title>FitPlan India — Smart Recommendations</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
@@ -116,6 +116,64 @@ body>*{position:relative;z-index:1;}
 @media(max-width:480px){.smart-form-grid{grid-template-columns:1fr;}.streak-row{grid-template-columns:repeat(4,1fr);}}
 ::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-thumb{background:var(--border);border-radius:100px;}
 ::selection{background:rgba(167,139,250,.25);}
+
+/* ── SLEEP TRACKER ── */
+.sleep-section{margin-bottom:2rem;animation:fadeUp .6s both .35s;}
+.sleep-card{background:linear-gradient(135deg,rgba(167,139,250,0.08),rgba(59,130,246,0.05));border:1px solid rgba(167,139,250,0.22);border-radius:20px;padding:1.5rem;backdrop-filter:blur(20px);}
+.sleep-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:.75rem;}
+.sleep-title-wrap{display:flex;align-items:center;gap:.75rem;}
+.sleep-moon{font-size:2rem;animation:moonpulse 4s ease-in-out infinite;}
+@keyframes moonpulse{0%,100%{transform:scale(1) rotate(-10deg)}50%{transform:scale(1.12) rotate(10deg)};}
+.sleep-title{font-family:var(--font-d);font-size:1rem;font-weight:800;}
+.sleep-sub{font-size:.75rem;color:var(--text2);margin-top:2px;}
+.sleep-badges{display:flex;gap:.5rem;flex-wrap:wrap;}
+.sleep-badge{padding:.28rem .75rem;border-radius:100px;font-size:.7rem;font-weight:700;font-family:var(--font-d);}
+.sleep-badge.purple{background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.25);color:var(--purple);}
+.sleep-badge.green{background:rgba(110,231,183,.12);border:1px solid rgba(110,231,183,.25);color:var(--green);}
+.sleep-badge.orange{background:rgba(251,146,60,.12);border:1px solid rgba(251,146,60,.25);color:var(--orange);}
+/* Input row */
+.sleep-input-row{display:grid;grid-template-columns:1fr 1fr auto;gap:1rem;margin-bottom:1.25rem;align-items:end;}
+.sleep-field label{display:block;font-size:.75rem;font-weight:600;color:var(--text2);margin-bottom:.4rem;}
+.sleep-field input,.sleep-field select{width:100%;padding:.65rem 1rem;background:var(--surface2);border:1px solid var(--border);border-radius:12px;color:var(--text);font-family:var(--font-b);font-size:.88rem;transition:all .2s;backdrop-filter:blur(8px);}
+.sleep-field input:focus,.sleep-field select:focus{outline:none;border-color:rgba(167,139,250,.4);}
+.sleep-field select option{background:#0d1424;}
+.btn-sleep-log{padding:.65rem 1.4rem;background:linear-gradient(135deg,#A78BFA,#6EE7B7);border:none;border-radius:12px;color:#070b12;font-family:var(--font-d);font-size:.85rem;font-weight:800;cursor:pointer;transition:all .25s var(--bounce);white-space:nowrap;}
+.btn-sleep-log:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(167,139,250,.3);}
+/* Quality stars */
+.quality-row{display:flex;gap:.5rem;margin-bottom:1.25rem;flex-wrap:wrap;}
+.quality-btn{flex:1;min-width:80px;padding:.6rem .5rem;background:var(--surface2);border:1px solid var(--border);border-radius:12px;cursor:pointer;text-align:center;transition:all .25s var(--bounce);font-size:.78rem;font-weight:600;color:var(--text2);}
+.quality-btn:hover{transform:translateY(-2px);}
+.quality-btn.selected.q1{background:rgba(248,113,113,.12);border-color:rgba(248,113,113,.4);color:#F87171;}
+.quality-btn.selected.q2{background:rgba(251,146,60,.12);border-color:rgba(251,146,60,.4);color:var(--orange);}
+.quality-btn.selected.q3{background:rgba(110,231,183,.12);border-color:rgba(110,231,183,.4);color:var(--green);}
+.quality-btn.selected.q4{background:rgba(167,139,250,.12);border-color:rgba(167,139,250,.4);color:var(--purple);}
+.quality-icon{font-size:1.2rem;display:block;margin-bottom:.2rem;}
+/* Score ring */
+.sleep-stats-row{display:grid;grid-template-columns:auto 1fr;gap:1.5rem;margin-bottom:1.25rem;align-items:center;}
+.sleep-score-wrap{position:relative;width:90px;height:90px;flex-shrink:0;}
+.sleep-score-wrap svg{width:100%;height:100%;transform:rotate(-90deg);}
+.ssring-bg{fill:none;stroke:var(--border);stroke-width:8;}
+.ssring-prog{fill:none;stroke:url(#slg);stroke-width:8;stroke-linecap:round;transition:stroke-dashoffset 1s var(--ease);}
+.sleep-score-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;}
+.sleep-score-val{font-family:var(--font-d);font-size:1.1rem;font-weight:800;line-height:1;}
+.sleep-score-lbl{font-size:.5rem;color:var(--text2);}
+.sleep-info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;}
+.sleep-info-item{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:.65rem;text-align:center;}
+.sleep-info-val{font-family:var(--font-d);font-size:.95rem;font-weight:800;}
+.sleep-info-lbl{font-size:.6rem;color:var(--text2);margin-top:2px;}
+/* Weekly chart */
+.sleep-week{display:grid;grid-template-columns:repeat(7,1fr);gap:.4rem;margin-bottom:1.25rem;}
+.sleep-day-col{display:flex;flex-direction:column;align-items:center;gap:.3rem;}
+.sleep-bar-wrap{height:60px;display:flex;align-items:flex-end;width:100%;}
+.sleep-bar{width:100%;border-radius:6px 6px 0 0;background:linear-gradient(180deg,#A78BFA,#7C3AED);min-height:4px;transition:height .6s var(--bounce);}
+.sleep-bar.good{background:linear-gradient(180deg,#6EE7B7,#059669);}
+.sleep-bar.low{background:linear-gradient(180deg,#FB923C,#EA580C);}
+.sleep-day-lbl{font-size:.58rem;color:var(--text3);font-weight:600;}
+.sleep-day-hrs{font-size:.6rem;color:var(--text2);font-weight:700;}
+/* Insight */
+.sleep-insight{display:flex;align-items:flex-start;gap:.65rem;padding:.85rem 1rem;border-radius:12px;background:rgba(167,139,250,.06);border:1px solid rgba(167,139,250,.15);font-size:.8rem;color:var(--text2);line-height:1.5;}
+.sleep-success{display:none;margin-top:.75rem;padding:.6rem 1rem;background:rgba(110,231,183,.1);border:1px solid rgba(110,231,183,.25);border-radius:10px;color:var(--green);font-size:.82rem;font-weight:500;text-align:center;animation:fadeUp .3s both;}
+@media(max-width:600px){.sleep-input-row{grid-template-columns:1fr 1fr;}.sleep-stats-row{grid-template-columns:1fr;}.sleep-info-grid{grid-template-columns:1fr 1fr 1fr;}.sleep-week{grid-template-columns:repeat(4,1fr);}}
   </style>
 </head>
 <body>
@@ -163,6 +221,99 @@ body>*{position:relative;z-index:1;}
   <div class="streak-row" id="streakRow"></div>
 
   <!-- SMART FORM -->
+
+  <!-- SLEEP TRACKER -->
+  <div class="sleep-section">
+    <div class="section-label">🌙 Sleep Tracker</div>
+    <div class="sleep-card">
+
+      <!-- Top -->
+      <div class="sleep-top">
+        <div class="sleep-title-wrap">
+          <span class="sleep-moon">🌙</span>
+          <div>
+            <div class="sleep-title">Last Night's Sleep</div>
+            <div class="sleep-sub">Track sleep to optimise recovery and fitness results</div>
+          </div>
+        </div>
+        <div class="sleep-badges">
+          <span class="sleep-badge purple" id="sleepStreakBadge">🔥 0 day streak</span>
+          <span class="sleep-badge green"  id="sleepAvgBadge">Avg: — hrs</span>
+          <span class="sleep-badge orange" id="sleepTodayBadge">Today: Not logged</span>
+        </div>
+      </div>
+
+      <!-- Quality selector -->
+      <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text2);margin-bottom:.5rem;">Sleep Quality</div>
+      <div class="quality-row">
+        <button class="quality-btn q1" data-q="1" onclick="selectQuality(1)"><span class="quality-icon">😴</span>Poor</button>
+        <button class="quality-btn q2" data-q="2" onclick="selectQuality(2)"><span class="quality-icon">😐</span>OK</button>
+        <button class="quality-btn q3" data-q="3" onclick="selectQuality(3)"><span class="quality-icon">😊</span>Good</button>
+        <button class="quality-btn q4" data-q="4" onclick="selectQuality(4)"><span class="quality-icon">🤩</span>Great</button>
+      </div>
+
+      <!-- Input row -->
+      <div class="sleep-input-row">
+        <div class="sleep-field">
+          <label>🕙 Slept at</label>
+          <input type="time" id="sleepTime" value="23:00"/>
+        </div>
+        <div class="sleep-field">
+          <label>⏰ Woke at</label>
+          <input type="time" id="wakeTime" value="07:00"/>
+        </div>
+        <button class="btn-sleep-log" onclick="logSleep()">+ Log Sleep</button>
+      </div>
+      <div class="sleep-success" id="sleepSuccess">✅ Sleep logged! Rest well tonight too.</div>
+
+      <!-- Score + Stats -->
+      <div class="sleep-stats-row" id="sleepStatsRow" style="display:none">
+        <div class="sleep-score-wrap">
+          <svg viewBox="0 0 100 100">
+            <defs>
+              <linearGradient id="slg" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#A78BFA"/>
+                <stop offset="100%" stop-color="#6EE7B7"/>
+              </linearGradient>
+            </defs>
+            <circle class="ssring-bg" cx="50" cy="50" r="38"/>
+            <circle class="ssring-prog" id="sleepRing" cx="50" cy="50" r="38"
+              stroke-dasharray="238.76" stroke-dashoffset="238.76"/>
+          </svg>
+          <div class="sleep-score-center">
+            <div class="sleep-score-val" id="sleepScoreVal">0</div>
+            <div class="sleep-score-lbl">score</div>
+          </div>
+        </div>
+        <div class="sleep-info-grid">
+          <div class="sleep-info-item">
+            <div class="sleep-info-val" id="sleepHrsVal" style="color:var(--purple)">—</div>
+            <div class="sleep-info-lbl">Hours Slept</div>
+          </div>
+          <div class="sleep-info-item">
+            <div class="sleep-info-val" id="sleepBedVal" style="color:var(--blue)">—</div>
+            <div class="sleep-info-lbl">Bedtime</div>
+          </div>
+          <div class="sleep-info-item">
+            <div class="sleep-info-val" id="sleepQualVal" style="color:var(--green)">—</div>
+            <div class="sleep-info-lbl">Quality</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Weekly bar chart -->
+      <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text2);margin-bottom:.6rem;">📅 This Week</div>
+      <div class="sleep-week" id="sleepWeek"></div>
+
+      <!-- Insight -->
+      <div class="sleep-insight">
+        <span style="font-size:1rem;flex-shrink:0">💡</span>
+        <span id="sleepInsight">Log your sleep tonight to get personalised sleep insights and recovery tips.</span>
+      </div>
+
+    </div>
+  </div>
+
   <div class="section-label">🧠 Get Smart Recommendations</div>
   <div class="smart-form-card">
     <div class="smart-form-grid">
@@ -352,6 +503,187 @@ try{
   if(fd.height) document.getElementById('sfHeight').value=fd.height;
   if(fd.goal)   document.getElementById('sfGoal').value=fd.goal;
 }catch(e){}
+
+/* ══════════════════════════════════════════
+   SLEEP TRACKER
+══════════════════════════════════════════ */
+const SL_KEY = 'fp_sleep';
+let selectedQuality = 3; // default Good
+
+const QUALITY_LABELS = {1:'Poor 😴', 2:'OK 😐', 3:'Good 😊', 4:'Great 🤩'};
+
+const SLEEP_INSIGHTS = {
+  great: [
+    'Outstanding sleep! Growth hormone peaks during deep sleep — your muscles are recovering perfectly.',
+    'Perfect sleep schedule! Sleeping before 11 PM maximises testosterone and recovery.',
+    'Great sleep quality + timing = faster fat loss and better muscle growth. Keep it up!',
+  ],
+  good: [
+    'Good sleep! Try to sleep 15 min earlier each night to reach 8 hrs consistently.',
+    'Solid rest! Avoid screens 30 min before bed to improve sleep quality further.',
+    'Good recovery! Add a 5 min stretching routine before bed to deepen your sleep.',
+  ],
+  ok: [
+    'Try to sleep 30 min earlier tonight. Even 30 min more can boost performance by 20%.',
+    'Mediocre sleep raises cortisol — this can slow fat loss. Prioritise sleep tonight.',
+    'Your workouts will suffer on poor sleep. Aim for bed before 11 PM tonight.',
+  ],
+  poor: [
+    '⚠️ Poor sleep detected! Cortisol is high — this breaks down muscle and stores fat.',
+    '⚠️ Less than 6 hrs seriously impacts recovery. Skip intense workout today — walk instead.',
+    '⚠️ Chronic poor sleep is the #1 hidden reason fitness goals stall. Fix this first.',
+  ],
+};
+
+function getSleepData() {
+  try { return JSON.parse(localStorage.getItem(SL_KEY) || '[]'); }
+  catch { return []; }
+}
+function saveSleepData(d) { localStorage.setItem(SL_KEY, JSON.stringify(d)); }
+
+function calcHours(sleepTime, wakeTime) {
+  const [sh, sm] = sleepTime.split(':').map(Number);
+  const [wh, wm] = wakeTime.split(':').map(Number);
+  let mins = (wh * 60 + wm) - (sh * 60 + sm);
+  if (mins < 0) mins += 1440; // crossed midnight
+  return parseFloat((mins / 60).toFixed(1));
+}
+
+function calcSleepScore(hours, quality, sleepTime) {
+  let score = 0;
+  // Hours score (max 50)
+  if (hours >= 8)       score += 50;
+  else if (hours >= 7)  score += 42;
+  else if (hours >= 6)  score += 28;
+  else if (hours >= 5)  score += 15;
+  else                  score += 5;
+  // Quality score (max 30)
+  score += (quality - 1) * 10;
+  // Bedtime score (max 20) — before 11 PM = full score
+  const [sh] = sleepTime.split(':').map(Number);
+  const bedHour = sh >= 18 ? sh : sh + 24; // handle crossing midnight display
+  if (sh <= 22)       score += 20;
+  else if (sh <= 23)  score += 14;
+  else if (sh <= 0)   score += 8;
+  else                score += 2;
+  return Math.min(100, score);
+}
+
+function selectQuality(q) {
+  selectedQuality = q;
+  document.querySelectorAll('.quality-btn').forEach(b => {
+    b.classList.remove('selected');
+    if (parseInt(b.dataset.q) === q) b.classList.add('selected');
+  });
+}
+
+function logSleep() {
+  const sleepTime = document.getElementById('sleepTime').value;
+  const wakeTime  = document.getElementById('wakeTime').value;
+  if (!sleepTime || !wakeTime) { alert('Please enter both sleep and wake time!'); return; }
+
+  const hours  = calcHours(sleepTime, wakeTime);
+  const score  = calcSleepScore(hours, selectedQuality, sleepTime);
+  const today  = new Date().toISOString().split('T')[0];
+  const data   = getSleepData();
+
+  const entry = { date: today, hours, sleepTime, wakeTime, quality: selectedQuality, score };
+  const idx   = data.findIndex(d => d.date === today);
+  if (idx >= 0) data[idx] = entry; else data.push(entry);
+  data.sort((a,b) => new Date(a.date) - new Date(b.date));
+  saveSleepData(data);
+
+  // Show success
+  const suc = document.getElementById('sleepSuccess');
+  suc.style.display = 'block';
+  setTimeout(() => suc.style.display = 'none', 3000);
+
+  renderSleep();
+}
+
+function getSleepStreak(data) {
+  if (!data.length) return 0;
+  const sorted = [...data].sort((a,b) => new Date(b.date) - new Date(a.date));
+  let streak = 0, check = new Date();
+  for (const d of sorted) {
+    if (new Date(d.date).toDateString() === check.toDateString()) {
+      streak++; check.setDate(check.getDate() - 1);
+    } else break;
+  }
+  return streak;
+}
+
+function renderSleep() {
+  const data  = getSleepData();
+  const today = new Date().toISOString().split('T')[0];
+  const todayEntry = data.find(d => d.date === today);
+  const streak = getSleepStreak(data);
+  const recent = data.slice(-7);
+
+  // Badges
+  document.getElementById('sleepStreakBadge').textContent = '🔥 ' + streak + ' day streak';
+
+  if (recent.length) {
+    const avg = (recent.reduce((s,d) => s+d.hours, 0) / recent.length).toFixed(1);
+    document.getElementById('sleepAvgBadge').textContent = 'Avg: ' + avg + ' hrs';
+  }
+
+  document.getElementById('sleepTodayBadge').textContent = todayEntry
+    ? 'Today: ' + todayEntry.hours + ' hrs'
+    : 'Today: Not logged';
+
+  // Score ring + stats
+  if (todayEntry) {
+    document.getElementById('sleepStatsRow').style.display = 'grid';
+    const circum = 2 * Math.PI * 38;
+    const offset = circum - (todayEntry.score / 100) * circum;
+    document.getElementById('sleepRing').style.strokeDashoffset = offset.toFixed(1);
+    document.getElementById('sleepScoreVal').textContent = todayEntry.score;
+    document.getElementById('sleepHrsVal').textContent = todayEntry.hours + 'h';
+    document.getElementById('sleepBedVal').textContent = todayEntry.sleepTime;
+    document.getElementById('sleepQualVal').textContent = QUALITY_LABELS[todayEntry.quality];
+  }
+
+  // Weekly bars
+  const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const weekEl = document.getElementById('sleepWeek');
+  weekEl.innerHTML = '';
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date(); d.setDate(d.getDate() - i);
+    const dateStr = d.toISOString().split('T')[0];
+    const entry   = data.find(e => e.date === dateStr);
+    const hrs     = entry ? entry.hours : 0;
+    const maxHrs  = 10;
+    const heightPct = hrs ? Math.round((hrs / maxHrs) * 100) : 0;
+    const barClass = hrs >= 7 ? 'sleep-bar good' : hrs >= 5 ? 'sleep-bar' : 'sleep-bar low';
+    weekEl.innerHTML += `
+      <div class="sleep-day-col">
+        <div class="sleep-bar-wrap">
+          <div class="${barClass}" style="height:${heightPct}%"></div>
+        </div>
+        <div class="sleep-day-lbl">${days[d.getDay()]}</div>
+        <div class="sleep-day-hrs">${hrs ? hrs+'h' : '—'}</div>
+      </div>`;
+  }
+
+  // Insight
+  const q = todayEntry ? todayEntry.quality : null;
+  let insightArr = SLEEP_INSIGHTS.good;
+  if (q === 4) insightArr = SLEEP_INSIGHTS.great;
+  else if (q === 3) insightArr = SLEEP_INSIGHTS.good;
+  else if (q === 2) insightArr = SLEEP_INSIGHTS.ok;
+  else if (q === 1) insightArr = SLEEP_INSIGHTS.poor;
+  const insightIdx = new Date().getDay() % insightArr.length;
+  document.getElementById('sleepInsight').textContent = todayEntry
+    ? insightArr[insightIdx]
+    : 'Log your sleep tonight to get personalised sleep insights and recovery tips.';
+
+  // Pre-select quality if already logged today
+  if (todayEntry) selectQuality(todayEntry.quality);
+}
+
+renderSleep();
+
 </script>
 </body>
 </html>
